@@ -1,0 +1,454 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		D43AF8AF22E33A13000861AE /* ESKUserDefaultsHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = D43AF8AE22E33A13000861AE /* ESKUserDefaultsHelper.m */; };
+		D43AF8B222E45038000861AE /* ESKCloseView.m in Sources */ = {isa = PBXBuildFile; fileRef = D43AF8B122E45038000861AE /* ESKCloseView.m */; };
+		D44BF79622CBD19800D112E3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D44BF79522CBD19800D112E3 /* AppDelegate.m */; };
+		D44BF79922CBD19800D112E3 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D44BF79822CBD19800D112E3 /* ViewController.m */; };
+		D44BF79C22CBD19800D112E3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D44BF79A22CBD19800D112E3 /* Main.storyboard */; };
+		D44BF79E22CBD19B00D112E3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D44BF79D22CBD19B00D112E3 /* Assets.xcassets */; };
+		D44BF7A122CBD19B00D112E3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D44BF79F22CBD19B00D112E3 /* LaunchScreen.storyboard */; };
+		D44BF7A422CBD19B00D112E3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D44BF7A322CBD19B00D112E3 /* main.m */; };
+		D44BF7D122D239DD00D112E3 /* ESKTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = D44BF7D022D239DD00D112E3 /* ESKTextField.m */; };
+		D44BF7D822D3F0CF00D112E3 /* RegistrationView.m in Sources */ = {isa = PBXBuildFile; fileRef = D44BF7D722D3F0CF00D112E3 /* RegistrationView.m */; };
+		D44BF7E522D88B9F00D112E3 /* AuthenticationView.m in Sources */ = {isa = PBXBuildFile; fileRef = D44BF7E422D88B9F00D112E3 /* AuthenticationView.m */; };
+		D44BF7E822D88BB300D112E3 /* AuthenticationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D44BF7E722D88BB300D112E3 /* AuthenticationViewController.m */; };
+		D44BF7F122D8A15300D112E3 /* RegistrationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D44BF7F022D8A15300D112E3 /* RegistrationViewController.m */; };
+		D44BF7F622D8B28D00D112E3 /* AuthorizationService.m in Sources */ = {isa = PBXBuildFile; fileRef = D44BF7F522D8B28D00D112E3 /* AuthorizationService.m */; };
+		D44BF85622DF84F200D112E3 /* ContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D44BF85522DF84F200D112E3 /* ContainerViewController.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		D43AF8AB22E332D6000861AE /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		D43AF8AD22E33A13000861AE /* ESKUserDefaultsHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ESKUserDefaultsHelper.h; sourceTree = "<group>"; };
+		D43AF8AE22E33A13000861AE /* ESKUserDefaultsHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ESKUserDefaultsHelper.m; sourceTree = "<group>"; };
+		D43AF8B022E45038000861AE /* ESKCloseView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ESKCloseView.h; sourceTree = "<group>"; };
+		D43AF8B122E45038000861AE /* ESKCloseView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ESKCloseView.m; sourceTree = "<group>"; };
+		D43AF8B322E46C52000861AE /* ESKCloseViewProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ESKCloseViewProtocol.h; sourceTree = "<group>"; };
+		D44BF79122CBD19800D112E3 /* MainProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MainProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D44BF79422CBD19800D112E3 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		D44BF79522CBD19800D112E3 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		D44BF79722CBD19800D112E3 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		D44BF79822CBD19800D112E3 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		D44BF79B22CBD19800D112E3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		D44BF79D22CBD19B00D112E3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		D44BF7A022CBD19B00D112E3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		D44BF7A222CBD19B00D112E3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D44BF7A322CBD19B00D112E3 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		D44BF7CF22D239DD00D112E3 /* ESKTextField.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ESKTextField.h; sourceTree = "<group>"; };
+		D44BF7D022D239DD00D112E3 /* ESKTextField.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ESKTextField.m; sourceTree = "<group>"; };
+		D44BF7D622D3F0CF00D112E3 /* RegistrationView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RegistrationView.h; sourceTree = "<group>"; };
+		D44BF7D722D3F0CF00D112E3 /* RegistrationView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RegistrationView.m; sourceTree = "<group>"; };
+		D44BF7E322D88B9F00D112E3 /* AuthenticationView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AuthenticationView.h; sourceTree = "<group>"; };
+		D44BF7E422D88B9F00D112E3 /* AuthenticationView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AuthenticationView.m; sourceTree = "<group>"; };
+		D44BF7E622D88BB300D112E3 /* AuthenticationViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AuthenticationViewController.h; sourceTree = "<group>"; };
+		D44BF7E722D88BB300D112E3 /* AuthenticationViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AuthenticationViewController.m; sourceTree = "<group>"; };
+		D44BF7E922D88BDD00D112E3 /* AuthenticationProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AuthenticationProtocol.h; sourceTree = "<group>"; };
+		D44BF7EE22D89E3700D112E3 /* RegistrationProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RegistrationProtocol.h; sourceTree = "<group>"; };
+		D44BF7EF22D8A15300D112E3 /* RegistrationViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RegistrationViewController.h; sourceTree = "<group>"; };
+		D44BF7F022D8A15300D112E3 /* RegistrationViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RegistrationViewController.m; sourceTree = "<group>"; };
+		D44BF7F422D8B28D00D112E3 /* AuthorizationService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AuthorizationService.h; sourceTree = "<group>"; };
+		D44BF7F522D8B28D00D112E3 /* AuthorizationService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AuthorizationService.m; sourceTree = "<group>"; };
+		D44BF7F722D8B2FC00D112E3 /* AuthorizationServiceProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AuthorizationServiceProtocol.h; sourceTree = "<group>"; };
+		D44BF85422DF84F200D112E3 /* ContainerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ContainerViewController.h; sourceTree = "<group>"; };
+		D44BF85522DF84F200D112E3 /* ContainerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ContainerViewController.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D44BF78E22CBD19800D112E3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		D43AF8AC22E339D4000861AE /* ESKUserDefaultsHelper */ = {
+			isa = PBXGroup;
+			children = (
+				D43AF8AD22E33A13000861AE /* ESKUserDefaultsHelper.h */,
+				D43AF8AE22E33A13000861AE /* ESKUserDefaultsHelper.m */,
+			);
+			name = ESKUserDefaultsHelper;
+			sourceTree = "<group>";
+		};
+		D44BF78822CBD19800D112E3 = {
+			isa = PBXGroup;
+			children = (
+				D44BF79322CBD19800D112E3 /* MainProject */,
+				D44BF79222CBD19800D112E3 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		D44BF79222CBD19800D112E3 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D44BF79122CBD19800D112E3 /* MainProject.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D44BF79322CBD19800D112E3 /* MainProject */ = {
+			isa = PBXGroup;
+			children = (
+				D43AF8AB22E332D6000861AE /* Constants.h */,
+				D43AF8AC22E339D4000861AE /* ESKUserDefaultsHelper */,
+				D44BF7F322D8B25E00D112E3 /* AuthorizationService */,
+				D44BF7ED22D89DAA00D112E3 /* Registration */,
+				D44BF7E222D88B0D00D112E3 /* Authentication */,
+				D44BF7D522D3F08200D112E3 /* CustomViews */,
+				D44BF85022DF844C00D112E3 /* ContainerViewController */,
+				D44BF79422CBD19800D112E3 /* AppDelegate.h */,
+				D44BF79522CBD19800D112E3 /* AppDelegate.m */,
+				D44BF79722CBD19800D112E3 /* ViewController.h */,
+				D44BF79822CBD19800D112E3 /* ViewController.m */,
+				D44BF79A22CBD19800D112E3 /* Main.storyboard */,
+				D44BF79D22CBD19B00D112E3 /* Assets.xcassets */,
+				D44BF79F22CBD19B00D112E3 /* LaunchScreen.storyboard */,
+				D44BF7A222CBD19B00D112E3 /* Info.plist */,
+				D44BF7A322CBD19B00D112E3 /* main.m */,
+			);
+			path = MainProject;
+			sourceTree = "<group>";
+		};
+		D44BF7D522D3F08200D112E3 /* CustomViews */ = {
+			isa = PBXGroup;
+			children = (
+				D43AF8B322E46C52000861AE /* ESKCloseViewProtocol.h */,
+				D43AF8B022E45038000861AE /* ESKCloseView.h */,
+				D43AF8B122E45038000861AE /* ESKCloseView.m */,
+				D44BF7CF22D239DD00D112E3 /* ESKTextField.h */,
+				D44BF7D022D239DD00D112E3 /* ESKTextField.m */,
+			);
+			name = CustomViews;
+			sourceTree = "<group>";
+		};
+		D44BF7E222D88B0D00D112E3 /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				D44BF7E922D88BDD00D112E3 /* AuthenticationProtocol.h */,
+				D44BF7E322D88B9F00D112E3 /* AuthenticationView.h */,
+				D44BF7E422D88B9F00D112E3 /* AuthenticationView.m */,
+				D44BF7E622D88BB300D112E3 /* AuthenticationViewController.h */,
+				D44BF7E722D88BB300D112E3 /* AuthenticationViewController.m */,
+			);
+			name = Authentication;
+			sourceTree = "<group>";
+		};
+		D44BF7ED22D89DAA00D112E3 /* Registration */ = {
+			isa = PBXGroup;
+			children = (
+				D44BF7EE22D89E3700D112E3 /* RegistrationProtocol.h */,
+				D44BF7D622D3F0CF00D112E3 /* RegistrationView.h */,
+				D44BF7D722D3F0CF00D112E3 /* RegistrationView.m */,
+				D44BF7EF22D8A15300D112E3 /* RegistrationViewController.h */,
+				D44BF7F022D8A15300D112E3 /* RegistrationViewController.m */,
+			);
+			name = Registration;
+			sourceTree = "<group>";
+		};
+		D44BF7F322D8B25E00D112E3 /* AuthorizationService */ = {
+			isa = PBXGroup;
+			children = (
+				D44BF7F722D8B2FC00D112E3 /* AuthorizationServiceProtocol.h */,
+				D44BF7F422D8B28D00D112E3 /* AuthorizationService.h */,
+				D44BF7F522D8B28D00D112E3 /* AuthorizationService.m */,
+			);
+			name = AuthorizationService;
+			sourceTree = "<group>";
+		};
+		D44BF85022DF844C00D112E3 /* ContainerViewController */ = {
+			isa = PBXGroup;
+			children = (
+				D44BF85422DF84F200D112E3 /* ContainerViewController.h */,
+				D44BF85522DF84F200D112E3 /* ContainerViewController.m */,
+			);
+			name = ContainerViewController;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		D44BF79022CBD19800D112E3 /* MainProject */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D44BF7A722CBD19B00D112E3 /* Build configuration list for PBXNativeTarget "MainProject" */;
+			buildPhases = (
+				D44BF78D22CBD19800D112E3 /* Sources */,
+				D44BF78E22CBD19800D112E3 /* Frameworks */,
+				D44BF78F22CBD19800D112E3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MainProject;
+			productName = MainProject;
+			productReference = D44BF79122CBD19800D112E3 /* MainProject.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D44BF78922CBD19800D112E3 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 1020;
+				ORGANIZATIONNAME = "Gagik Avetisyan";
+				TargetAttributes = {
+					D44BF79022CBD19800D112E3 = {
+						CreatedOnToolsVersion = 10.2.1;
+					};
+				};
+			};
+			buildConfigurationList = D44BF78C22CBD19800D112E3 /* Build configuration list for PBXProject "MainProject" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = D44BF78822CBD19800D112E3;
+			productRefGroup = D44BF79222CBD19800D112E3 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D44BF79022CBD19800D112E3 /* MainProject */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		D44BF78F22CBD19800D112E3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D44BF7A122CBD19B00D112E3 /* LaunchScreen.storyboard in Resources */,
+				D44BF79E22CBD19B00D112E3 /* Assets.xcassets in Resources */,
+				D44BF79C22CBD19800D112E3 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		D44BF78D22CBD19800D112E3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D44BF7D122D239DD00D112E3 /* ESKTextField.m in Sources */,
+				D44BF7F122D8A15300D112E3 /* RegistrationViewController.m in Sources */,
+				D44BF79922CBD19800D112E3 /* ViewController.m in Sources */,
+				D44BF7E522D88B9F00D112E3 /* AuthenticationView.m in Sources */,
+				D44BF85622DF84F200D112E3 /* ContainerViewController.m in Sources */,
+				D43AF8B222E45038000861AE /* ESKCloseView.m in Sources */,
+				D43AF8AF22E33A13000861AE /* ESKUserDefaultsHelper.m in Sources */,
+				D44BF7A422CBD19B00D112E3 /* main.m in Sources */,
+				D44BF7F622D8B28D00D112E3 /* AuthorizationService.m in Sources */,
+				D44BF7E822D88BB300D112E3 /* AuthenticationViewController.m in Sources */,
+				D44BF7D822D3F0CF00D112E3 /* RegistrationView.m in Sources */,
+				D44BF79622CBD19800D112E3 /* AppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		D44BF79A22CBD19800D112E3 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D44BF79B22CBD19800D112E3 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		D44BF79F22CBD19B00D112E3 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D44BF7A022CBD19B00D112E3 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		D44BF7A522CBD19B00D112E3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		D44BF7A622CBD19B00D112E3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		D44BF7A822CBD19B00D112E3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 64FJ833QL3;
+				INFOPLIST_FILE = MainProject/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.TheEska.MainProject;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		D44BF7A922CBD19B00D112E3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 64FJ833QL3;
+				INFOPLIST_FILE = MainProject/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.TheEska.MainProject;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		D44BF78C22CBD19800D112E3 /* Build configuration list for PBXProject "MainProject" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D44BF7A522CBD19B00D112E3 /* Debug */,
+				D44BF7A622CBD19B00D112E3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D44BF7A722CBD19B00D112E3 /* Build configuration list for PBXNativeTarget "MainProject" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D44BF7A822CBD19B00D112E3 /* Debug */,
+				D44BF7A922CBD19B00D112E3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D44BF78922CBD19800D112E3 /* Project object */;
+}
