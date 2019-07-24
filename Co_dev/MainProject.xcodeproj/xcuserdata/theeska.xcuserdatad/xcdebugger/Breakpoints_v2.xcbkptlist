@@ -9,13 +9,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "MainProject/AuthenticationViewController.m"
-            timestampString = "585487479.285871"
+            filePath = "MainProject/ESKContainerCollectionViewController.m"
+            timestampString = "585701645.957741"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "50"
-            endingLineNumber = "50"
-            landmarkName = "-viewDidAppear:"
+            startingLineNumber = "62"
+            endingLineNumber = "62"
+            landmarkName = "-scrollViewWillEndDragging:withVelocity:targetContentOffset:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -25,13 +25,29 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "MainProject/ESKUserDefaultsHelper.m"
-            timestampString = "585487479.285997"
+            filePath = "MainProject/ESKContainerCollectionViewController.m"
+            timestampString = "585701645.958009"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "20"
-            endingLineNumber = "20"
-            landmarkName = "+addAPIToken:forEmail:andPassword:"
+            startingLineNumber = "62"
+            endingLineNumber = "62"
+            landmarkName = "-scrollViewWillEndDragging:withVelocity:targetContentOffset:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MainProject/ESKTabBar.m"
+            timestampString = "585701645.958075"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "59"
+            endingLineNumber = "59"
+            landmarkName = "-selectItemNumber:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

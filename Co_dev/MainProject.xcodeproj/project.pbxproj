@@ -7,8 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D4139F1122E87F98000F8597 /* ESKTabBarCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = D4139F1022E87F98000F8597 /* ESKTabBarCollectionView.m */; };
 		D43AF8AF22E33A13000861AE /* ESKUserDefaultsHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = D43AF8AE22E33A13000861AE /* ESKUserDefaultsHelper.m */; };
 		D43AF8B222E45038000861AE /* ESKCloseView.m in Sources */ = {isa = PBXBuildFile; fileRef = D43AF8B122E45038000861AE /* ESKCloseView.m */; };
+		D43AF8B722E66E6A000861AE /* ESKTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = D43AF8B622E66E6A000861AE /* ESKTabBar.m */; };
+		D43AF8BA22E66F49000861AE /* ESKTabBarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = D43AF8B922E66F49000861AE /* ESKTabBarItem.m */; };
+		D43AF8C022E794C7000861AE /* ESKContainerCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D43AF8BF22E794C7000861AE /* ESKContainerCollectionViewCell.m */; };
+		D43AF8C322E7A589000861AE /* ESKContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D43AF8C222E7A589000861AE /* ESKContainerViewController.m */; };
+		D43AF8CB22E83F73000861AE /* ESKContainerCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = D43AF8CA22E83F73000861AE /* ESKContainerCollectionView.m */; };
+		D43AF8CE22E83FA3000861AE /* ESKContainerCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D43AF8CD22E83FA3000861AE /* ESKContainerCollectionViewController.m */; };
 		D44BF79622CBD19800D112E3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D44BF79522CBD19800D112E3 /* AppDelegate.m */; };
 		D44BF79922CBD19800D112E3 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D44BF79822CBD19800D112E3 /* ViewController.m */; };
 		D44BF79C22CBD19800D112E3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D44BF79A22CBD19800D112E3 /* Main.storyboard */; };
@@ -21,16 +28,30 @@
 		D44BF7E822D88BB300D112E3 /* AuthenticationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D44BF7E722D88BB300D112E3 /* AuthenticationViewController.m */; };
 		D44BF7F122D8A15300D112E3 /* RegistrationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D44BF7F022D8A15300D112E3 /* RegistrationViewController.m */; };
 		D44BF7F622D8B28D00D112E3 /* AuthorizationService.m in Sources */ = {isa = PBXBuildFile; fileRef = D44BF7F522D8B28D00D112E3 /* AuthorizationService.m */; };
-		D44BF85622DF84F200D112E3 /* ContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D44BF85522DF84F200D112E3 /* ContainerViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D4139F0E22E87E7A000F8597 /* ESKTabBatProtocols.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ESKTabBatProtocols.h; sourceTree = "<group>"; };
+		D4139F0F22E87F98000F8597 /* ESKTabBarCollectionView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ESKTabBarCollectionView.h; sourceTree = "<group>"; };
+		D4139F1022E87F98000F8597 /* ESKTabBarCollectionView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ESKTabBarCollectionView.m; sourceTree = "<group>"; };
 		D43AF8AB22E332D6000861AE /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		D43AF8AD22E33A13000861AE /* ESKUserDefaultsHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ESKUserDefaultsHelper.h; sourceTree = "<group>"; };
 		D43AF8AE22E33A13000861AE /* ESKUserDefaultsHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ESKUserDefaultsHelper.m; sourceTree = "<group>"; };
 		D43AF8B022E45038000861AE /* ESKCloseView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ESKCloseView.h; sourceTree = "<group>"; };
 		D43AF8B122E45038000861AE /* ESKCloseView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ESKCloseView.m; sourceTree = "<group>"; };
 		D43AF8B322E46C52000861AE /* ESKCloseViewProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ESKCloseViewProtocol.h; sourceTree = "<group>"; };
+		D43AF8B522E66E6A000861AE /* ESKTabBar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ESKTabBar.h; sourceTree = "<group>"; };
+		D43AF8B622E66E6A000861AE /* ESKTabBar.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ESKTabBar.m; sourceTree = "<group>"; };
+		D43AF8B822E66F49000861AE /* ESKTabBarItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ESKTabBarItem.h; sourceTree = "<group>"; };
+		D43AF8B922E66F49000861AE /* ESKTabBarItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ESKTabBarItem.m; sourceTree = "<group>"; };
+		D43AF8BE22E794C7000861AE /* ESKContainerCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ESKContainerCollectionViewCell.h; sourceTree = "<group>"; };
+		D43AF8BF22E794C7000861AE /* ESKContainerCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ESKContainerCollectionViewCell.m; sourceTree = "<group>"; };
+		D43AF8C122E7A589000861AE /* ESKContainerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ESKContainerViewController.h; sourceTree = "<group>"; };
+		D43AF8C222E7A589000861AE /* ESKContainerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ESKContainerViewController.m; sourceTree = "<group>"; };
+		D43AF8C922E83F73000861AE /* ESKContainerCollectionView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ESKContainerCollectionView.h; sourceTree = "<group>"; };
+		D43AF8CA22E83F73000861AE /* ESKContainerCollectionView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ESKContainerCollectionView.m; sourceTree = "<group>"; };
+		D43AF8CD22E83FA3000861AE /* ESKContainerCollectionViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ESKContainerCollectionViewController.m; sourceTree = "<group>"; };
+		D43AF8CF22E85455000861AE /* ESKContainerCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESKContainerCollectionViewController.h; sourceTree = "<group>"; };
 		D44BF79122CBD19800D112E3 /* MainProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MainProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D44BF79422CBD19800D112E3 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		D44BF79522CBD19800D112E3 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -56,8 +77,7 @@
 		D44BF7F422D8B28D00D112E3 /* AuthorizationService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AuthorizationService.h; sourceTree = "<group>"; };
 		D44BF7F522D8B28D00D112E3 /* AuthorizationService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AuthorizationService.m; sourceTree = "<group>"; };
 		D44BF7F722D8B2FC00D112E3 /* AuthorizationServiceProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AuthorizationServiceProtocol.h; sourceTree = "<group>"; };
-		D44BF85422DF84F200D112E3 /* ContainerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ContainerViewController.h; sourceTree = "<group>"; };
-		D44BF85522DF84F200D112E3 /* ContainerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ContainerViewController.m; sourceTree = "<group>"; };
+		D4CED2D822E8E2B300AE5D3E /* ESKContainerCollectionViewProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ESKContainerCollectionViewProtocol.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +98,34 @@
 				D43AF8AE22E33A13000861AE /* ESKUserDefaultsHelper.m */,
 			);
 			name = ESKUserDefaultsHelper;
+			sourceTree = "<group>";
+		};
+		D43AF8C722E83E67000861AE /* TabBar */ = {
+			isa = PBXGroup;
+			children = (
+				D4139F0E22E87E7A000F8597 /* ESKTabBatProtocols.h */,
+				D43AF8B822E66F49000861AE /* ESKTabBarItem.h */,
+				D43AF8B922E66F49000861AE /* ESKTabBarItem.m */,
+				D4139F0F22E87F98000F8597 /* ESKTabBarCollectionView.h */,
+				D4139F1022E87F98000F8597 /* ESKTabBarCollectionView.m */,
+				D43AF8B522E66E6A000861AE /* ESKTabBar.h */,
+				D43AF8B622E66E6A000861AE /* ESKTabBar.m */,
+			);
+			name = TabBar;
+			sourceTree = "<group>";
+		};
+		D43AF8C822E83E76000861AE /* ContainerCollectionView */ = {
+			isa = PBXGroup;
+			children = (
+				D4CED2D822E8E2B300AE5D3E /* ESKContainerCollectionViewProtocol.h */,
+				D43AF8BE22E794C7000861AE /* ESKContainerCollectionViewCell.h */,
+				D43AF8BF22E794C7000861AE /* ESKContainerCollectionViewCell.m */,
+				D43AF8C922E83F73000861AE /* ESKContainerCollectionView.h */,
+				D43AF8CA22E83F73000861AE /* ESKContainerCollectionView.m */,
+				D43AF8CF22E85455000861AE /* ESKContainerCollectionViewController.h */,
+				D43AF8CD22E83FA3000861AE /* ESKContainerCollectionViewController.m */,
+			);
+			name = ContainerCollectionView;
 			sourceTree = "<group>";
 		};
 		D44BF78822CBD19800D112E3 = {
@@ -168,8 +216,10 @@
 		D44BF85022DF844C00D112E3 /* ContainerViewController */ = {
 			isa = PBXGroup;
 			children = (
-				D44BF85422DF84F200D112E3 /* ContainerViewController.h */,
-				D44BF85522DF84F200D112E3 /* ContainerViewController.m */,
+				D43AF8C822E83E76000861AE /* ContainerCollectionView */,
+				D43AF8C722E83E67000861AE /* TabBar */,
+				D43AF8C122E7A589000861AE /* ESKContainerViewController.h */,
+				D43AF8C222E7A589000861AE /* ESKContainerViewController.m */,
 			);
 			name = ContainerViewController;
 			sourceTree = "<group>";
@@ -244,17 +294,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D43AF8C022E794C7000861AE /* ESKContainerCollectionViewCell.m in Sources */,
 				D44BF7D122D239DD00D112E3 /* ESKTextField.m in Sources */,
 				D44BF7F122D8A15300D112E3 /* RegistrationViewController.m in Sources */,
 				D44BF79922CBD19800D112E3 /* ViewController.m in Sources */,
 				D44BF7E522D88B9F00D112E3 /* AuthenticationView.m in Sources */,
-				D44BF85622DF84F200D112E3 /* ContainerViewController.m in Sources */,
 				D43AF8B222E45038000861AE /* ESKCloseView.m in Sources */,
 				D43AF8AF22E33A13000861AE /* ESKUserDefaultsHelper.m in Sources */,
+				D43AF8B722E66E6A000861AE /* ESKTabBar.m in Sources */,
 				D44BF7A422CBD19B00D112E3 /* main.m in Sources */,
 				D44BF7F622D8B28D00D112E3 /* AuthorizationService.m in Sources */,
+				D43AF8CB22E83F73000861AE /* ESKContainerCollectionView.m in Sources */,
 				D44BF7E822D88BB300D112E3 /* AuthenticationViewController.m in Sources */,
+				D43AF8C322E7A589000861AE /* ESKContainerViewController.m in Sources */,
 				D44BF7D822D3F0CF00D112E3 /* RegistrationView.m in Sources */,
+				D43AF8BA22E66F49000861AE /* ESKTabBarItem.m in Sources */,
+				D43AF8CE22E83FA3000861AE /* ESKContainerCollectionViewController.m in Sources */,
+				D4139F1122E87F98000F8597 /* ESKTabBarCollectionView.m in Sources */,
 				D44BF79622CBD19800D112E3 /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

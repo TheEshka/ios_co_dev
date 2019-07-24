@@ -7,6 +7,8 @@
 //
 
 #import "AppDelegate.h"
+#import "ESKContainerViewController.h"
+#import "ESKContainerCollectionViewController.h"
 
 @interface AppDelegate ()
 
@@ -18,9 +20,38 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
-//    UIPageViewController *container = [[UIPageViewController alloc] initWithTransitionStyle:0 navigationOrientation:0 options:nil];
-//
-//    self.window.rootViewController = container;
+    ESKContainerViewController *container = [ESKContainerViewController new];
+    
+    UIViewController *vc1 = [UIViewController new];
+    vc1.view.backgroundColor = [UIColor grayColor];
+    UILabel *lb1 = [[UILabel alloc] initWithFrame:CGRectMake(200, 200, 100, 100)];
+    [lb1 setText:@"11111111111"];
+    [vc1.view addSubview:lb1];
+
+    UIViewController *vc2 = [UIViewController new];
+    vc2.view.backgroundColor = [UIColor blueColor];
+    UILabel *lb2 = [[UILabel alloc] initWithFrame:CGRectMake(200, 200, 100, 100)];
+    [lb2 setText:@"2222222222"];
+    [vc2.view addSubview:lb2];
+
+    UIViewController *vc3 = [UIViewController new];
+    vc3.view.backgroundColor = [UIColor brownColor];
+    UILabel *lb3 = [[UILabel alloc] initWithFrame:CGRectMake(200, 200, 100, 100)];
+    [lb3 setText:@"333333333"];
+    [vc3.view addSubview:lb3];
+
+    UIViewController *vc4 = [UIViewController new];
+    vc4.view.backgroundColor = [UIColor purpleColor];
+    UILabel *lb4 = [[UILabel alloc] initWithFrame:CGRectMake(200, 200, 100, 100)];
+    [lb4 setText:@"4444444444"];
+    [vc4.view addSubview:lb4];
+
+    [container addContentViewController:vc1 forTitle:@"Profile"];
+    [container addContentViewController:vc2 forTitle:@"Wall"];
+    [container addContentViewController:vc3 forTitle:@"Settings"];
+    [container addContentViewController:vc4 forTitle:@"Popka"];
+
+    self.window.rootViewController = container;
     return YES;
 }
 

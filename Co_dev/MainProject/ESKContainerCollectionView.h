@@ -1,8 +1,8 @@
 //
-//  ContainerViewController.h
+//  ESKContainerCollectionView.h
 //  MainProject
 //
-//  Created by Gagik on 17/07/2019.
+//  Created by Gagik on 24/07/2019.
 //  Copyright © 2019 Gagik Avetisyan. All rights reserved.
 //
 
@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ContainerViewController : UICollectionViewController
+@interface ESKContainerCollectionView : UICollectionView
 
 @end
 
