@@ -15,7 +15,7 @@
 @property (nonatomic, strong) ESKContainerCollectionView *collectionView;
 @property (nonatomic, strong) NSMutableArray<UIViewController *> *viewControllersArray;
 
-@property (nonatomic, assign) BOOL isDelegatedAction;
+@property (nonatomic, assign) BOOL disableDelegatedAction;
 @property (nonatomic, assign) NSInteger delegateViewNumber;
 
 @end
@@ -37,7 +37,7 @@ static NSString * const ESKMainReuseIdentifier = @"MainCell";
 - (void)openViewControllerNumber:(NSInteger)num
 {
     NSIndexPath *indexPath = [NSIndexPath indexPathForItem:num inSection:0];
-    self.isDelegatedAction = YES;
+    self.disableDelegatedAction = YES;
     self.delegateViewNumber = num;
     [self.collectionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
 }
@@ -56,14 +56,8 @@ static NSString * const ESKMainReuseIdentifier = @"MainCell";
     return cell;
 }
 
-- (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset
-{
-    NSInteger qwe = targetContentOffset->x / CGRectGetWidth(self.collectionView.frame);
-    [self.delegate collectionViewChangePageTo:qwe];
-}
 
-
-#pragma mark - UICollectionViewDataSource
+#pragma mark - UICollectionViewDelegate
 
 - (void)collectionView:(UICollectionView *)collectionView didEndDisplayingCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -85,18 +79,26 @@ static NSString * const ESKMainReuseIdentifier = @"MainCell";
 //    [currentViewController didMoveToParentViewController:self];
     
     [((ESKContainerCollectionViewCell *)cell) addViewControllerToParentViewController:self];
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    NSInteger itemNumber = scrollView.contentOffset.x / CGRectGetWidth(self.collectionView.frame) + 0.5;
+//    NSLog(@"offset: %f,  cell: %ld", scrollView.contentOffset.x, qwe);
     
     //Для случаев когда был вызван от таб бара и не нужно возвращать действие
-    if (self.isDelegatedAction)
+    if (self.disableDelegatedAction)
     {
         //Для случаев, когда перескакиваем несколько контроллеров по тап бару
-        if (self.delegateViewNumber == indexPath.item)
+        if (self.delegateViewNumber == itemNumber)
         {
-            self.isDelegatedAction = NO;
+            self.disableDelegatedAction = NO;
         }
         return;
     }
-    [self.delegate collectionViewChangePageTo:indexPath.item];
+    [self.delegate collectionViewChangedPageTo:itemNumber];
+    
+    
 }
 
 

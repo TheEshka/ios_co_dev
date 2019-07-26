@@ -10,6 +10,8 @@
 #import "ESKContainerViewController.h"
 #import "ESKContainerCollectionViewController.h"
 
+#import "ESKProfileViewController.h"
+
 @interface AppDelegate ()
 
 @end
@@ -20,13 +22,12 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
+//    ESKProfileViewController *prof = [[ESKProfileViewController alloc] init];
+//    self.window.rootViewController = prof;
+    
     ESKContainerViewController *container = [ESKContainerViewController new];
     
-    UIViewController *vc1 = [UIViewController new];
-    vc1.view.backgroundColor = [UIColor grayColor];
-    UILabel *lb1 = [[UILabel alloc] initWithFrame:CGRectMake(200, 200, 100, 100)];
-    [lb1 setText:@"11111111111"];
-    [vc1.view addSubview:lb1];
+    ESKProfileViewController *vc1 = [[ESKProfileViewController alloc] init];
 
     UIViewController *vc2 = [UIViewController new];
     vc2.view.backgroundColor = [UIColor blueColor];

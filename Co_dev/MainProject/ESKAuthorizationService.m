@@ -6,21 +6,21 @@
 //  Copyright © 2019 Gagik Avetisyan. All rights reserved.
 //
 
-#import "AuthorizationService.h"
+#import "ESKAuthorizationService.h"
 
 #define AUTHORIZATION_REQUEST 1
 #define REGISTRATION_REQUEST 2
 
-@interface AuthorizationService ()<NSURLSessionDataDelegate, NSURLSessionTaskDelegate>
+@interface ESKAuthorizationService ()<NSURLSessionDataDelegate, NSURLSessionTaskDelegate>
 
-@property (nonatomic, strong) NSURLSession *urlSession;
+@property (nonatomic, strong) NSURLSession *urlSession;/**< Описание свойства */
 
 @end
 
-@implementation AuthorizationService
+@implementation ESKAuthorizationService
 
 
-#pragma mark AuthorizationServiceIntputProtocol
+#pragma mark ESKAuthorizationServiceIntputProtocol
 
 - (void)configureUrlSessionWithParams:(NSDictionary *)params
 {

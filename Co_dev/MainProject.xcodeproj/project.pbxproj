@@ -23,18 +23,20 @@
 		D44BF7A122CBD19B00D112E3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D44BF79F22CBD19B00D112E3 /* LaunchScreen.storyboard */; };
 		D44BF7A422CBD19B00D112E3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D44BF7A322CBD19B00D112E3 /* main.m */; };
 		D44BF7D122D239DD00D112E3 /* ESKTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = D44BF7D022D239DD00D112E3 /* ESKTextField.m */; };
-		D44BF7D822D3F0CF00D112E3 /* RegistrationView.m in Sources */ = {isa = PBXBuildFile; fileRef = D44BF7D722D3F0CF00D112E3 /* RegistrationView.m */; };
-		D44BF7E522D88B9F00D112E3 /* AuthenticationView.m in Sources */ = {isa = PBXBuildFile; fileRef = D44BF7E422D88B9F00D112E3 /* AuthenticationView.m */; };
-		D44BF7E822D88BB300D112E3 /* AuthenticationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D44BF7E722D88BB300D112E3 /* AuthenticationViewController.m */; };
-		D44BF7F122D8A15300D112E3 /* RegistrationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D44BF7F022D8A15300D112E3 /* RegistrationViewController.m */; };
-		D44BF7F622D8B28D00D112E3 /* AuthorizationService.m in Sources */ = {isa = PBXBuildFile; fileRef = D44BF7F522D8B28D00D112E3 /* AuthorizationService.m */; };
+		D44BF7D822D3F0CF00D112E3 /* ESKRegistrationView.m in Sources */ = {isa = PBXBuildFile; fileRef = D44BF7D722D3F0CF00D112E3 /* ESKRegistrationView.m */; };
+		D44BF7E522D88B9F00D112E3 /* ESKAuthenticationView.m in Sources */ = {isa = PBXBuildFile; fileRef = D44BF7E422D88B9F00D112E3 /* ESKAuthenticationView.m */; };
+		D44BF7E822D88BB300D112E3 /* ESKAuthenticationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D44BF7E722D88BB300D112E3 /* ESKAuthenticationViewController.m */; };
+		D44BF7F122D8A15300D112E3 /* ESKRegistrationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D44BF7F022D8A15300D112E3 /* ESKRegistrationViewController.m */; };
+		D44BF7F622D8B28D00D112E3 /* ESKAuthorizationService.m in Sources */ = {isa = PBXBuildFile; fileRef = D44BF7F522D8B28D00D112E3 /* ESKAuthorizationService.m */; };
+		D4CED2DF22EAC2B700AE5D3E /* ESKProfileView.m in Sources */ = {isa = PBXBuildFile; fileRef = D4CED2DE22EAC2B700AE5D3E /* ESKProfileView.m */; };
+		D4CED2E222EAC2CD00AE5D3E /* ESKProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4CED2E122EAC2CD00AE5D3E /* ESKProfileViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		D4139F0E22E87E7A000F8597 /* ESKTabBatProtocols.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ESKTabBatProtocols.h; sourceTree = "<group>"; };
 		D4139F0F22E87F98000F8597 /* ESKTabBarCollectionView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ESKTabBarCollectionView.h; sourceTree = "<group>"; };
 		D4139F1022E87F98000F8597 /* ESKTabBarCollectionView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ESKTabBarCollectionView.m; sourceTree = "<group>"; };
-		D43AF8AB22E332D6000861AE /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		D43AF8AB22E332D6000861AE /* ESKConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ESKConstants.h; sourceTree = "<group>"; };
 		D43AF8AD22E33A13000861AE /* ESKUserDefaultsHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ESKUserDefaultsHelper.h; sourceTree = "<group>"; };
 		D43AF8AE22E33A13000861AE /* ESKUserDefaultsHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ESKUserDefaultsHelper.m; sourceTree = "<group>"; };
 		D43AF8B022E45038000861AE /* ESKCloseView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ESKCloseView.h; sourceTree = "<group>"; };
@@ -64,20 +66,25 @@
 		D44BF7A322CBD19B00D112E3 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		D44BF7CF22D239DD00D112E3 /* ESKTextField.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ESKTextField.h; sourceTree = "<group>"; };
 		D44BF7D022D239DD00D112E3 /* ESKTextField.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ESKTextField.m; sourceTree = "<group>"; };
-		D44BF7D622D3F0CF00D112E3 /* RegistrationView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RegistrationView.h; sourceTree = "<group>"; };
-		D44BF7D722D3F0CF00D112E3 /* RegistrationView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RegistrationView.m; sourceTree = "<group>"; };
-		D44BF7E322D88B9F00D112E3 /* AuthenticationView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AuthenticationView.h; sourceTree = "<group>"; };
-		D44BF7E422D88B9F00D112E3 /* AuthenticationView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AuthenticationView.m; sourceTree = "<group>"; };
-		D44BF7E622D88BB300D112E3 /* AuthenticationViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AuthenticationViewController.h; sourceTree = "<group>"; };
-		D44BF7E722D88BB300D112E3 /* AuthenticationViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AuthenticationViewController.m; sourceTree = "<group>"; };
-		D44BF7E922D88BDD00D112E3 /* AuthenticationProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AuthenticationProtocol.h; sourceTree = "<group>"; };
-		D44BF7EE22D89E3700D112E3 /* RegistrationProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RegistrationProtocol.h; sourceTree = "<group>"; };
-		D44BF7EF22D8A15300D112E3 /* RegistrationViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RegistrationViewController.h; sourceTree = "<group>"; };
-		D44BF7F022D8A15300D112E3 /* RegistrationViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RegistrationViewController.m; sourceTree = "<group>"; };
-		D44BF7F422D8B28D00D112E3 /* AuthorizationService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AuthorizationService.h; sourceTree = "<group>"; };
-		D44BF7F522D8B28D00D112E3 /* AuthorizationService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AuthorizationService.m; sourceTree = "<group>"; };
-		D44BF7F722D8B2FC00D112E3 /* AuthorizationServiceProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AuthorizationServiceProtocol.h; sourceTree = "<group>"; };
+		D44BF7D622D3F0CF00D112E3 /* ESKRegistrationView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ESKRegistrationView.h; sourceTree = "<group>"; };
+		D44BF7D722D3F0CF00D112E3 /* ESKRegistrationView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ESKRegistrationView.m; sourceTree = "<group>"; };
+		D44BF7E322D88B9F00D112E3 /* ESKAuthenticationView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ESKAuthenticationView.h; sourceTree = "<group>"; };
+		D44BF7E422D88B9F00D112E3 /* ESKAuthenticationView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ESKAuthenticationView.m; sourceTree = "<group>"; };
+		D44BF7E622D88BB300D112E3 /* ESKAuthenticationViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ESKAuthenticationViewController.h; sourceTree = "<group>"; };
+		D44BF7E722D88BB300D112E3 /* ESKAuthenticationViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ESKAuthenticationViewController.m; sourceTree = "<group>"; };
+		D44BF7E922D88BDD00D112E3 /* ESKAuthenticationProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ESKAuthenticationProtocol.h; sourceTree = "<group>"; };
+		D44BF7EE22D89E3700D112E3 /* ESKRegistrationProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ESKRegistrationProtocol.h; sourceTree = "<group>"; };
+		D44BF7EF22D8A15300D112E3 /* ESKRegistrationViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ESKRegistrationViewController.h; sourceTree = "<group>"; };
+		D44BF7F022D8A15300D112E3 /* ESKRegistrationViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ESKRegistrationViewController.m; sourceTree = "<group>"; };
+		D44BF7F422D8B28D00D112E3 /* ESKAuthorizationService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ESKAuthorizationService.h; sourceTree = "<group>"; };
+		D44BF7F522D8B28D00D112E3 /* ESKAuthorizationService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ESKAuthorizationService.m; sourceTree = "<group>"; };
+		D44BF7F722D8B2FC00D112E3 /* ESKAuthorizationServiceProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ESKAuthorizationServiceProtocol.h; sourceTree = "<group>"; };
 		D4CED2D822E8E2B300AE5D3E /* ESKContainerCollectionViewProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ESKContainerCollectionViewProtocol.h; sourceTree = "<group>"; };
+		D4CED2DD22EAC2B700AE5D3E /* ESKProfileView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ESKProfileView.h; sourceTree = "<group>"; };
+		D4CED2DE22EAC2B700AE5D3E /* ESKProfileView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ESKProfileView.m; sourceTree = "<group>"; };
+		D4CED2E022EAC2CD00AE5D3E /* ESKProfileViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ESKProfileViewController.h; sourceTree = "<group>"; };
+		D4CED2E122EAC2CD00AE5D3E /* ESKProfileViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ESKProfileViewController.m; sourceTree = "<group>"; };
+		D4CED2E322EAC83700AE5D3E /* ESKProfileProtocols.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ESKProfileProtocols.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,13 +98,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		D43AF8AC22E339D4000861AE /* ESKUserDefaultsHelper */ = {
+		D43AF8AC22E339D4000861AE /* UserDefaultsHelper */ = {
 			isa = PBXGroup;
 			children = (
 				D43AF8AD22E33A13000861AE /* ESKUserDefaultsHelper.h */,
 				D43AF8AE22E33A13000861AE /* ESKUserDefaultsHelper.m */,
 			);
-			name = ESKUserDefaultsHelper;
+			name = UserDefaultsHelper;
 			sourceTree = "<group>";
 		};
 		D43AF8C722E83E67000861AE /* TabBar */ = {
@@ -147,13 +154,14 @@
 		D44BF79322CBD19800D112E3 /* MainProject */ = {
 			isa = PBXGroup;
 			children = (
-				D43AF8AB22E332D6000861AE /* Constants.h */,
-				D43AF8AC22E339D4000861AE /* ESKUserDefaultsHelper */,
+				D43AF8AB22E332D6000861AE /* ESKConstants.h */,
+				D43AF8AC22E339D4000861AE /* UserDefaultsHelper */,
 				D44BF7F322D8B25E00D112E3 /* AuthorizationService */,
 				D44BF7ED22D89DAA00D112E3 /* Registration */,
 				D44BF7E222D88B0D00D112E3 /* Authentication */,
 				D44BF7D522D3F08200D112E3 /* CustomViews */,
 				D44BF85022DF844C00D112E3 /* ContainerViewController */,
+				D4CED2D922EAC27500AE5D3E /* Profile */,
 				D44BF79422CBD19800D112E3 /* AppDelegate.h */,
 				D44BF79522CBD19800D112E3 /* AppDelegate.m */,
 				D44BF79722CBD19800D112E3 /* ViewController.h */,
@@ -182,11 +190,11 @@
 		D44BF7E222D88B0D00D112E3 /* Authentication */ = {
 			isa = PBXGroup;
 			children = (
-				D44BF7E922D88BDD00D112E3 /* AuthenticationProtocol.h */,
-				D44BF7E322D88B9F00D112E3 /* AuthenticationView.h */,
-				D44BF7E422D88B9F00D112E3 /* AuthenticationView.m */,
-				D44BF7E622D88BB300D112E3 /* AuthenticationViewController.h */,
-				D44BF7E722D88BB300D112E3 /* AuthenticationViewController.m */,
+				D44BF7E922D88BDD00D112E3 /* ESKAuthenticationProtocol.h */,
+				D44BF7E322D88B9F00D112E3 /* ESKAuthenticationView.h */,
+				D44BF7E422D88B9F00D112E3 /* ESKAuthenticationView.m */,
+				D44BF7E622D88BB300D112E3 /* ESKAuthenticationViewController.h */,
+				D44BF7E722D88BB300D112E3 /* ESKAuthenticationViewController.m */,
 			);
 			name = Authentication;
 			sourceTree = "<group>";
@@ -194,11 +202,11 @@
 		D44BF7ED22D89DAA00D112E3 /* Registration */ = {
 			isa = PBXGroup;
 			children = (
-				D44BF7EE22D89E3700D112E3 /* RegistrationProtocol.h */,
-				D44BF7D622D3F0CF00D112E3 /* RegistrationView.h */,
-				D44BF7D722D3F0CF00D112E3 /* RegistrationView.m */,
-				D44BF7EF22D8A15300D112E3 /* RegistrationViewController.h */,
-				D44BF7F022D8A15300D112E3 /* RegistrationViewController.m */,
+				D44BF7EE22D89E3700D112E3 /* ESKRegistrationProtocol.h */,
+				D44BF7D622D3F0CF00D112E3 /* ESKRegistrationView.h */,
+				D44BF7D722D3F0CF00D112E3 /* ESKRegistrationView.m */,
+				D44BF7EF22D8A15300D112E3 /* ESKRegistrationViewController.h */,
+				D44BF7F022D8A15300D112E3 /* ESKRegistrationViewController.m */,
 			);
 			name = Registration;
 			sourceTree = "<group>";
@@ -206,9 +214,9 @@
 		D44BF7F322D8B25E00D112E3 /* AuthorizationService */ = {
 			isa = PBXGroup;
 			children = (
-				D44BF7F722D8B2FC00D112E3 /* AuthorizationServiceProtocol.h */,
-				D44BF7F422D8B28D00D112E3 /* AuthorizationService.h */,
-				D44BF7F522D8B28D00D112E3 /* AuthorizationService.m */,
+				D44BF7F722D8B2FC00D112E3 /* ESKAuthorizationServiceProtocol.h */,
+				D44BF7F422D8B28D00D112E3 /* ESKAuthorizationService.h */,
+				D44BF7F522D8B28D00D112E3 /* ESKAuthorizationService.m */,
 			);
 			name = AuthorizationService;
 			sourceTree = "<group>";
@@ -222,6 +230,18 @@
 				D43AF8C222E7A589000861AE /* ESKContainerViewController.m */,
 			);
 			name = ContainerViewController;
+			sourceTree = "<group>";
+		};
+		D4CED2D922EAC27500AE5D3E /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				D4CED2E322EAC83700AE5D3E /* ESKProfileProtocols.h */,
+				D4CED2DD22EAC2B700AE5D3E /* ESKProfileView.h */,
+				D4CED2DE22EAC2B700AE5D3E /* ESKProfileView.m */,
+				D4CED2E022EAC2CD00AE5D3E /* ESKProfileViewController.h */,
+				D4CED2E122EAC2CD00AE5D3E /* ESKProfileViewController.m */,
+			);
+			name = Profile;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -296,19 +316,21 @@
 			files = (
 				D43AF8C022E794C7000861AE /* ESKContainerCollectionViewCell.m in Sources */,
 				D44BF7D122D239DD00D112E3 /* ESKTextField.m in Sources */,
-				D44BF7F122D8A15300D112E3 /* RegistrationViewController.m in Sources */,
+				D44BF7F122D8A15300D112E3 /* ESKRegistrationViewController.m in Sources */,
 				D44BF79922CBD19800D112E3 /* ViewController.m in Sources */,
-				D44BF7E522D88B9F00D112E3 /* AuthenticationView.m in Sources */,
+				D44BF7E522D88B9F00D112E3 /* ESKAuthenticationView.m in Sources */,
 				D43AF8B222E45038000861AE /* ESKCloseView.m in Sources */,
 				D43AF8AF22E33A13000861AE /* ESKUserDefaultsHelper.m in Sources */,
 				D43AF8B722E66E6A000861AE /* ESKTabBar.m in Sources */,
 				D44BF7A422CBD19B00D112E3 /* main.m in Sources */,
-				D44BF7F622D8B28D00D112E3 /* AuthorizationService.m in Sources */,
+				D44BF7F622D8B28D00D112E3 /* ESKAuthorizationService.m in Sources */,
 				D43AF8CB22E83F73000861AE /* ESKContainerCollectionView.m in Sources */,
-				D44BF7E822D88BB300D112E3 /* AuthenticationViewController.m in Sources */,
+				D44BF7E822D88BB300D112E3 /* ESKAuthenticationViewController.m in Sources */,
 				D43AF8C322E7A589000861AE /* ESKContainerViewController.m in Sources */,
-				D44BF7D822D3F0CF00D112E3 /* RegistrationView.m in Sources */,
+				D4CED2DF22EAC2B700AE5D3E /* ESKProfileView.m in Sources */,
+				D44BF7D822D3F0CF00D112E3 /* ESKRegistrationView.m in Sources */,
 				D43AF8BA22E66F49000861AE /* ESKTabBarItem.m in Sources */,
+				D4CED2E222EAC2CD00AE5D3E /* ESKProfileViewController.m in Sources */,
 				D43AF8CE22E83FA3000861AE /* ESKContainerCollectionViewController.m in Sources */,
 				D4139F1122E87F98000F8597 /* ESKTabBarCollectionView.m in Sources */,
 				D44BF79622CBD19800D112E3 /* AppDelegate.m in Sources */,

@@ -6,13 +6,13 @@
 //  Copyright © 2019 Gagik Avetisyan. All rights reserved.
 //
 
-#import "RegistrationView.h"
+#import "ESKRegistrationView.h"
 #import "ESKTextField.h"
-#import "Constants.h"
+#import "ESKConstants.h"
 #import "ESKCloseView.h"
 
 
-@interface RegistrationView ()
+@interface ESKRegistrationView ()
 
 @property (nonatomic, strong) ESKTextField *emailField;
 @property (nonatomic, strong) ESKTextField *passwordField;
@@ -25,7 +25,7 @@
 
 @end
 
-@implementation RegistrationView
+@implementation ESKRegistrationView
 
 - (instancetype)init
 {
@@ -53,7 +53,7 @@
 }
 
 
-#pragma mark - RegistrationViewActivity
+#pragma mark - ESKRegistrationViewActivity
 
 - (void)registrationSuccess
 {
@@ -69,7 +69,7 @@
 }
 
 
-#pragma marl - Getters
+#pragma marl - Lazy Getters
 
 - (UILabel *)errorLabel
 {
@@ -146,29 +146,26 @@
       [_emailField.centerXAnchor constraintEqualToAnchor:self.centerXAnchor],
       [_emailField.bottomAnchor constraintEqualToAnchor:_passwordField.topAnchor constant:-ESKBetweenOffset],
       [_emailField.widthAnchor constraintEqualToConstant:ESKTextFiledWidth],
-      //[_emailField.heightAnchor constraintEqualToConstant:25.f],
       
       [_passwordField.centerXAnchor constraintEqualToAnchor:self.centerXAnchor],
       [_passwordField.bottomAnchor constraintEqualToAnchor:self.centerYAnchor constant:-ESKBetweenOffset],
       [_passwordField.widthAnchor constraintEqualToConstant:ESKTextFiledWidth],
-      //[_passwordField.heightAnchor constraintEqualToConstant:25.f],
       
       [_registrationButton.centerXAnchor constraintEqualToAnchor:self.centerXAnchor],
       [_registrationButton.topAnchor constraintEqualToAnchor:_passwordField.bottomAnchor constant:50.f],
       [_registrationButton.widthAnchor constraintEqualToConstant:ESKButtonWidth],
-      //[_registrationButton.heightAnchor constraintEqualToConstant:25.f]
       ];
     [self addConstraints:constraints];
 }
 
+
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
     [self endEditing:YES];
-    
 }
 
 
-- (void)setDelegate:(id<RegistrationViewDelegate>)delegate
+- (void)setDelegate:(id<ESKRegistrationViewDelegate>)delegate
 {
     _delegate = delegate;
     _closeView.delegate = delegate;

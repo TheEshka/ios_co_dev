@@ -6,11 +6,11 @@
 //  Copyright © 2019 Gagik Avetisyan. All rights reserved.
 //
 
-#import "AuthenticationView.h"
-#import "AuthenticationProtocol.h"
+#import "ESKAuthenticationView.h"
+#import "ESKAuthenticationProtocol.h"
 #import "ESKTextField.h"
 
-@interface AuthenticationView ()
+@interface ESKAuthenticationView ()
 
 @property (nonatomic, strong) ESKTextField *emailField;
 @property (nonatomic, strong) ESKTextField *passwordField;
@@ -23,7 +23,7 @@
 
 @end
 
-@implementation AuthenticationView
+@implementation ESKAuthenticationView
 
 - (instancetype)init
 {

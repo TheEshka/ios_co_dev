@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 /**
- Manage container view controller methods (call addChildViewController and didMoveToParentViewController)
+ Manage container view controller methods (call addChildViewController and didMoveToParentViewController) for changing view controller in cell
  Called from UICollectionViewDelegate methods
  Also allocate cell's ViewController's View into cell
 
@@ -27,7 +27,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 /**
- Manage container view controller methods (call addChildViewController and didMoveToParentViewController
+ Manage container view controller methods (call addChildViewController and didMoveToParentViewController) for changing view controller in cell
  Called from UICollectionViewDelegate methods
  Also remove cell's ViewController's View from cell
  */

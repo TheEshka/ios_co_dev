@@ -8,6 +8,11 @@
 
 @protocol ESKContainerCollectionViewControllerDelegate <NSObject>
 
-- (void)collectionViewChangePageTo:(NSInteger)num;
+/**
+ Tells the delegate that containetCollectonView page has changed to another item
+
+ @param num item number starting from 0
+ */
+- (void)collectionViewChangedPageTo:(NSInteger)num;
 
 @end

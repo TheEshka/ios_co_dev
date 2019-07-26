@@ -6,38 +6,37 @@
 //  Copyright © 2019 Gagik Avetisyan. All rights reserved.
 //
 
-#import "AuthenticationViewController.h"
-#import "AuthenticationView.h"
-#import "AuthenticationProtocol.h"
-#import "RegistrationViewController.h"
-#import "AuthorizationServiceProtocol.h"
-#import "AuthorizationService.h"
+#import "ESKAuthenticationViewController.h"
+#import "ESKAuthenticationView.h"
+#import "ESKAuthenticationProtocol.h"
+#import "ESKRegistrationViewController.h"
+#import "ESKAuthorizationServiceProtocol.h"
+#import "ESKAuthorizationService.h"
 #import "ESKUserDefaultsHelper.h"
 
 
-@interface AuthenticationViewController ()<AuthenticationViewDelegate, AuthorizationServiceAuthothicationDelegate>
+@interface ESKAuthenticationViewController ()<ESKAuthenticationViewDelegate, ESKAuthorizationServiceAuthethicationDelegate>
 
-@property (nonatomic, strong) AuthenticationView *authenticationView;
-@property (nonatomic, strong) AuthorizationService *authorizationService;
-@property (nonatomic, strong) RegistrationViewController *registrationViewController;
+@property (nonatomic, strong) ESKAuthenticationView *authenticationView;
+@property (nonatomic, strong) ESKAuthorizationService *authorizationService;
 
 @end
 
-@implementation AuthenticationViewController
+@implementation ESKAuthenticationViewController
 
 #pragma mark - ViewControllerLifyCycle
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    _authenticationView = [[AuthenticationView alloc] init];
+    _authenticationView = [[ESKAuthenticationView alloc] init];
     _authenticationView.delegate = self;
     
     self.modalTransitionStyle = 1;
     self.modalPresentationStyle = 0;
     self.view = _authenticationView;
     
-    _authorizationService = [[AuthorizationService alloc] init];
+    _authorizationService = [[ESKAuthorizationService alloc] init];
     _authorizationService.authorizationDelegate = self;
     [_authorizationService configureUrlSessionWithParams:@{ @"Accept" : @"application/json" }];
 }
@@ -63,8 +62,9 @@
 
 - (void)goToRegistrationButtonPressed
 {
-    [self presentViewController:self.registrationViewController animated:YES completion:nil];
-//    [self showViewController:registrationViewController sender:self];
+    ESKRegistrationViewController *registrationViewController = [[ESKRegistrationViewController alloc] initWithViewAuthorizationService:self.authorizationService];
+    self.authorizationService.registrationDelegate = registrationViewController;
+    [self presentViewController:registrationViewController animated:YES completion:nil];
 }
 
 
@@ -84,19 +84,6 @@
     [self.authenticationView authorizationSuccess];
     [ESKUserDefaultsHelper addAPIToken:token forEmail:email andPassword:password];
     [self dismissViewControllerAnimated:YES completion:nil];
-}
-
-
-
-#pragma mark - Getter
-
-- (RegistrationViewController *)registrationViewController
-{
-    if (!_registrationViewController)
-    {
-        _registrationViewController = [[RegistrationViewController alloc] initWithViewAuthorizationService:self.authorizationService];
-    }
-    return _registrationViewController;
 }
 
 @end

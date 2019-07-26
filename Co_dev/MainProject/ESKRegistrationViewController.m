@@ -6,28 +6,28 @@
 //  Copyright © 2019 Gagik Avetisyan. All rights reserved.
 //
 
-#import "RegistrationViewController.h"
-#import "RegistrationView.h"
-#import "AuthorizationService.h"
+#import "ESKRegistrationViewController.h"
+#import "ESKRegistrationView.h"
+#import "ESKAuthorizationService.h"
 #import "ESKUserDefaultsHelper.h"
 
-@interface RegistrationViewController ()<RegistrationViewDelegate, AuthorizationServiceRegistrationDelegate>
+@interface ESKRegistrationViewController ()<ESKRegistrationViewDelegate>
 
-@property (nonatomic, strong) AuthorizationService *authorizationService;
-@property (nonatomic, strong) RegistrationView *registrationView;
+@property (nonatomic, strong) id<ESKAuthorizationServiceIntputProtocol> authorizationService;
+@property (nonatomic, strong) ESKRegistrationView *registrationView;
 
 @end
 
-@implementation RegistrationViewController
+@implementation ESKRegistrationViewController
 
 #pragma mark - Custom initializer
 
-- (instancetype)initWithViewAuthorizationService:(AuthorizationService *)authorizationService
+- (instancetype)initWithViewAuthorizationService:(ESKAuthorizationService *)authorizationService
 {
     self = [super init];
     if (self) {
         self.authorizationService = authorizationService;
-        self.authorizationService.registrationDelegate = self;
+        //self.authorizationService.registrationDelegate = self;
     }
     return self;
 }
@@ -39,7 +39,7 @@
 {
     [super viewDidLoad];
     
-    self.registrationView = [[RegistrationView alloc] init];
+    self.registrationView = [[ESKRegistrationView alloc] init];
     self.registrationView.delegate = self;
     
     self.modalTransitionStyle = 0;

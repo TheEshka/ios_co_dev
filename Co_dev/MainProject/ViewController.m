@@ -7,7 +7,7 @@
 //
 
 #import "ViewController.h"
-#import "AuthenticationViewController.h"
+#import "ESKAuthenticationViewController.h"
 #import "ESKTabBar.h"
 #import "ESKTabBarItem.h"
 

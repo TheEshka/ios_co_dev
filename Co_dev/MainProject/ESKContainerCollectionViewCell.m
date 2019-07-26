@@ -14,6 +14,8 @@
 
 @implementation ESKContainerCollectionViewCell
 
+#pragma mark - Overrided methods for changing content of cell
+
 - (void)prepareForReuse
 {
     [super prepareForReuse];
@@ -24,13 +26,17 @@
 - (void)setHostView:(nullable UIView *)hostView
 {
     _hostView = hostView;
+    _hostView.frame = self.contentView.bounds;
     [self.contentView addSubview:_hostView];
 }
+
+
+#pragma mark - Customer Methods
 
 - (void)addViewControllerToParentViewController:(UIViewController *)parentViewController {
     [parentViewController addChildViewController:self.contentViewController];
     [self.contentViewController didMoveToParentViewController:parentViewController];
-    [self.contentView addSubview:self.contentViewController.view];
+    self.hostView = self.contentViewController.view;
 }
 
 - (void)removeViewControllerFromParentViewController {

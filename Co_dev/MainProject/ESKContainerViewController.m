@@ -36,6 +36,7 @@
 
 - (void)viewDidAppear:(BOOL)animated
 {
+    [self.tabBar selectItemNumber:1];
     [super viewDidAppear:YES];
 }
 
@@ -46,17 +47,39 @@
 {
     [self.collectionViewController addViewController:viewController];
     [self.tabBar addItemWithTitle:title];
+    [self setupConstraints];
+    
 }
 
 
 #pragma mark - Helper Setup Methods
+
+- (void)setupConstraints
+{
+    self.collectionViewController.view.translatesAutoresizingMaskIntoConstraints = NO;
+    self.tabBar.view.translatesAutoresizingMaskIntoConstraints = NO;
+    NSArray<NSLayoutConstraint *> *constraints=
+    @[
+      [self.collectionViewController.view.topAnchor constraintEqualToAnchor:self.view.topAnchor],
+      [self.collectionViewController.view.leadingAnchor constraintEqualToAnchor:self.view.leadingAnchor],
+      [self.collectionViewController.view.trailingAnchor constraintEqualToAnchor:self.view.trailingAnchor],
+      [self.collectionViewController.view.bottomAnchor constraintEqualToAnchor:self.tabBar.view.topAnchor],
+      
+      [self.tabBar.view.heightAnchor constraintEqualToConstant:100.0f],
+      [self.tabBar.view.leadingAnchor constraintEqualToAnchor:self.view.leadingAnchor],
+      [self.tabBar.view.trailingAnchor constraintEqualToAnchor:self.view.trailingAnchor],
+      [self.tabBar.view.bottomAnchor constraintEqualToAnchor:self.view.bottomAnchor]
+    
+      ];
+    [self.view addConstraints:constraints];
+}
 
 - (void)setupTapBar
 {
     self.tabBar = [[ESKTabBar alloc] init];
     [self addChildViewController:self.tabBar];
     [self.tabBar didMoveToParentViewController:self];
-    self.tabBar.view.frame = CGRectMake(0, CGRectGetHeight(self.view.frame) * 0.9f, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame) * 0.1f);
+    //self.tabBar.view.frame = CGRectMake(0, CGRectGetHeight(self.view.frame) * 0.9f, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame) * 0.1f);
     [self.view addSubview:self.tabBar.view];
     self.tabBar.delegate = self;
 }
@@ -66,7 +89,7 @@
     self.collectionViewController = [[ESKContainerCollectionViewController alloc] init];
     [self addChildViewController:self.collectionViewController];
     [self.collectionViewController didMoveToParentViewController:self];
-    self.collectionViewController.view.frame = CGRectMake(0, 0, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame) * 0.9f);
+    //self.collectionViewController.view.frame = CGRectMake(0, 0, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame) * 0.9f);
     [self.view addSubview:self.collectionViewController.view];
     self.collectionViewController.delegate = self;
 }
@@ -82,7 +105,7 @@
 
 #pragma mark - ESKContainerCollectionViewControllerDelegate
 
-- (void)collectionViewChangePageTo:(NSInteger)num
+- (void)collectionViewChangedPageTo:(NSInteger)num
 {
     [self.tabBar selectDelegatedItemNumber:num];
 }

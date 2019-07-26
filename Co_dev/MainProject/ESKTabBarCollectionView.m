@@ -22,6 +22,7 @@
     self = [super initWithFrame:CGRectZero collectionViewLayout:[self setupLayout]];
     if (self) {
         [self setPagingEnabled:YES];
+        self.scrollEnabled = NO;
         self.backgroundColor = [UIColor cyanColor];
         [self setupGestureRecognizers];
     }
