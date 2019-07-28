@@ -1,5 +1,5 @@
 //
-//  ESKProfileView.h
+//  ESKAuthorizedProfileView.h
 //  MainProject
 //
 //  Created by Gagik on 26/07/2019.
@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ESKProfileProtocols.h"
+#import "ESKProfileViewProtocols.h"
 
 NS_ASSUME_NONNULL_BEGIN
 

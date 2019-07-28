@@ -19,7 +19,7 @@
         [self setPagingEnabled:YES];
         [self setShowsHorizontalScrollIndicator:NO];
         [self setShowsVerticalScrollIndicator:NO];
-        self.backgroundColor = [UIColor cyanColor];
+        //self.backgroundColor = [UIColor cyanColor];
     }
     return self;
 }

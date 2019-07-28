@@ -7,13 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ESKAuthenticationProtocol.h"
+#import "ESKAuthenticationProtocols.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ESKAuthenticationView : UIView<ESKAuthenticationViewActivity>
+@interface ESKAuthenticationView : UIView<ESKAuthenticationPresenterDelegate>
 
 @property (nonatomic, weak) id<ESKAuthenticationViewDelegate> delegate;
+
+@property (nonatomic, strong) id<ESKAuthenticationViewPresenter> presenter;
 
 @end
 

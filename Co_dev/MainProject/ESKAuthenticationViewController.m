@@ -8,82 +8,71 @@
 
 #import "ESKAuthenticationViewController.h"
 #import "ESKAuthenticationView.h"
-#import "ESKAuthenticationProtocol.h"
+//#import "ESKAuthenticationProtocols.h"
 #import "ESKRegistrationViewController.h"
-#import "ESKAuthorizationServiceProtocol.h"
-#import "ESKAuthorizationService.h"
-#import "ESKUserDefaultsHelper.h"
+#import "ESKAuthenticationPresenter.h"
 
 
-@interface ESKAuthenticationViewController ()<ESKAuthenticationViewDelegate, ESKAuthorizationServiceAuthethicationDelegate>
+@interface ESKAuthenticationViewController ()<ESKAuthenticationViewDelegate>
 
 @property (nonatomic, strong) ESKAuthenticationView *authenticationView;
-@property (nonatomic, strong) ESKAuthorizationService *authorizationService;
 
 @end
 
 @implementation ESKAuthenticationViewController
 
-#pragma mark - ViewControllerLifyCycle
+#pragma mark - ViewController Lify Cycle
+
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        self.modalTransitionStyle = 0;
+        self.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+        self.definesPresentationContext = YES;
+    }
+    return self;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    _authenticationView = [[ESKAuthenticationView alloc] init];
-    _authenticationView.delegate = self;
+    ESKAuthenticationPresenter *presenter = [ESKAuthenticationPresenter new];
+    self.authenticationView = [[ESKAuthenticationView alloc] init];
+    self.authenticationView.delegate = self;
+    self.authenticationView.presenter = presenter;
+    presenter.delegate = self.authenticationView;
     
-    self.modalTransitionStyle = 1;
-    self.modalPresentationStyle = 0;
-    self.view = _authenticationView;
-    
-    _authorizationService = [[ESKAuthorizationService alloc] init];
-    _authorizationService.authorizationDelegate = self;
-    [_authorizationService configureUrlSessionWithParams:@{ @"Accept" : @"application/json" }];
+    self.view = self.authenticationView;
 }
 
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:YES];
-    
-    NSString *token = [ESKUserDefaultsHelper getAPIToken];
-    if (token)
-    {
-        [self dismissViewControllerAnimated:YES completion:nil];
-    }
-}
 
-#pragma mark - AuthenticationViewDelegate
+#pragma mark - ESKAuthenticationViewDelegate
 
-- (void)loginButtonPressedWithEmail:(NSString *)email andPassword:(NSString *)password
+- (void)registrationButtonPressed
 {
-    NSLog(@"loginning with email: %@; and password %@", email, password);
-    [self.authorizationService authorizeWithEmail:email andPassword:password];
-}
-
-- (void)goToRegistrationButtonPressed
-{
-    ESKRegistrationViewController *registrationViewController = [[ESKRegistrationViewController alloc] initWithViewAuthorizationService:self.authorizationService];
-    self.authorizationService.registrationDelegate = registrationViewController;
+    ESKRegistrationViewController *registrationViewController = [[ESKRegistrationViewController alloc] init];
+//    self.authorizationService.registrationDelegate = registrationViewController;
     [self presentViewController:registrationViewController animated:YES completion:nil];
 }
 
-
-#pragma mark - AuthorizationServiceAuthorizationDelegate
-
-- (void)authorizationUnsuccessWithError:(NSError *)error
+- (void)close
 {
-    [self.authenticationView authorizationUnsuccessWithMessage:[error localizedDescription]];
-}
-
-- (void)authorizationUnsuccessWithResponse:(NSDictionary *)errorMessage
-{
-    [self.authenticationView authorizationUnsuccessWithMessage:errorMessage[@"error"]];
-}
-
-- (void)authorizationSuccessForEmail:(NSString *)email withPassword:(NSString *)password andToken:(NSString *)token {
-    [self.authenticationView authorizationSuccess];
-    [ESKUserDefaultsHelper addAPIToken:token forEmail:email andPassword:password];
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)dismissViewControllerAnimated:(BOOL)flag completion:(void (^)(void))completion
+{
+    [super dismissViewControllerAnimated:flag completion:completion];
+}
+
+
+#pragma mark - UIContentContainer
+
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
+{
+    [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
+    self.view.frame = CGRectMake(0, 0, size.width, size.height);
 }
 
 @end

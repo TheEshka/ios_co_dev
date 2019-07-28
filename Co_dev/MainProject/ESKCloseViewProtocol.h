@@ -6,8 +6,9 @@
 //  Copyright © 2019 Gagik Avetisyan. All rights reserved.
 //
 
-@protocol ESKCloseViewDelegate <NSObject>
+@protocol ESKCloseDraggableViewDelegate <NSObject>
 
-- (void)close;
+- (void)closeViewDragged:(CGPoint)translation;
+- (void)draggingDidEnd;
 
 @end

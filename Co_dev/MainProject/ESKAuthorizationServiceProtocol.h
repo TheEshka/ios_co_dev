@@ -6,48 +6,34 @@
 //  Copyright © 2019 Gagik Avetisyan. All rights reserved.
 //
 
+@class ESKUser;
+
 @protocol ESKAuthorizationServiceIntputProtocol <NSObject>
-
-/**
- Configure NSURLSessions of AuthorizationService with NSDictionary of headers
-
- @param params dictionary of headers
- */
-- (void)configureUrlSessionWithParams:(NSDictionary *)params;
-
-
 /**
  Send authorization request that will callback response to authorizationDelegate by AuthorizationServiceAuthorizationDelegate
 
- @param email NSString with email
- @param password NSString with password
+ @param user Object ESKUser with email and password
  */
-- (void)authorizeWithEmail:(NSString *)email andPassword:(NSString *)password;
+- (void)authorizeWithUserParams:(ESKUser *)user;
 
 
 /**
  Send registration request that will callback response to registrationDelegate by AuthorizationServiceRegistrationDelegate.
 
- @param email NSString with email
- @param password NSString with password
+ @param user Object ESKUser with email, name and password
  */
-- (void)registerWithEmail:(NSString *)email andPassword:(NSString *)password;
+- (void)registerWithUserParams:(ESKUser *)user;
 
 @end
 
 
 @protocol ESKAuthorizationServiceAuthethicationDelegate <NSObject>
-
 /**
  Tells delegate that authorization was completed successfully and return its email password and got token
 
- @param email sended for authorization email
- @param password sended dor authorization password
- @param token got token
+ @param user object ESKUser that was passed for request with recieved userID and token
  */
-- (void)authorizationSuccessForEmail:(NSString *)email
-                       withPassword:(NSString *)password
-                           andToken:(NSString *)token;
+- (void)authorizationSuccessForUser:(ESKUser *)user;
 
 /**
  Tells delegate that authorization was completed unsuccessfully and request return NSError
@@ -66,18 +52,14 @@
 
 @end
 
-@protocol ESKAuthorizationServiceRegistrationDelegate <NSObject>
 
+@protocol ESKAuthorizationServiceRegistrationDelegate <NSObject>
 /**
  Tells delegate that registration was completed successfully and return its email password and got token
 
- @param email sended for authorization email
- @param password sended dor authorization password
- @param token got token
+ @param user object ESKUser that was passed for request with recieved userID and token
  */
-- (void)registrationSuccessForEmail:(NSString *)email
-                       withPassword:(NSString *)password
-                           andToken:(NSString *)token;
+- (void)registrationSuccessForUser:(ESKUser *)user;
 
 /**
  Tells delegate that registration was completed unsuccessfully and request return NSError

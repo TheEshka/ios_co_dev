@@ -26,6 +26,7 @@
 - (void)setHostView:(nullable UIView *)hostView
 {
     _hostView = hostView;
+    //self = _hostView;
     _hostView.frame = self.contentView.bounds;
     [self.contentView addSubview:_hostView];
 }

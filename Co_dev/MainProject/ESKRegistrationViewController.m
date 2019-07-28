@@ -9,75 +9,84 @@
 #import "ESKRegistrationViewController.h"
 #import "ESKRegistrationView.h"
 #import "ESKAuthorizationService.h"
-#import "ESKUserDefaultsHelper.h"
+#import "ESKRegistrationPresenter.h"
+#import "ESKRegistrationProtocols.h"
 
-@interface ESKRegistrationViewController ()<ESKRegistrationViewDelegate>
+@interface ESKRegistrationViewController ()<ESKCloseDraggableViewDelegate, ESKRegistrationViewDelegate>
 
-@property (nonatomic, strong) id<ESKAuthorizationServiceIntputProtocol> authorizationService;
 @property (nonatomic, strong) ESKRegistrationView *registrationView;
 
 @end
 
 @implementation ESKRegistrationViewController
 
-#pragma mark - Custom initializer
+#pragma mark - ViewController Lify Cycle
 
-- (instancetype)initWithViewAuthorizationService:(ESKAuthorizationService *)authorizationService
+- (instancetype)init
 {
     self = [super init];
     if (self) {
-        self.authorizationService = authorizationService;
-        //self.authorizationService.registrationDelegate = self;
+        self.modalTransitionStyle = 0;
+        self.modalPresentationStyle = UIModalPresentationOverCurrentContext;
     }
     return self;
 }
-
-
-#pragma mark - ViewController Life Cycle
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
+    ESKRegistrationPresenter *presenter = [ESKRegistrationPresenter new];
     self.registrationView = [[ESKRegistrationView alloc] init];
+    self.registrationView.closeDelegate = self;
     self.registrationView.delegate = self;
-    
-    self.modalTransitionStyle = 0;
-    self.modalPresentationStyle = UIModalPresentationCurrentContext;
+    self.registrationView.presenter = presenter;
+    presenter.delegate = self.registrationView;
     self.view = self.registrationView;
 }
 
 
-#pragma mark - RegistrationViewDelegate
-- (void)registrationButtonPressedWithEmail:(NSString *)email andPassword:(NSString *)password
+#pragma mark - ESKRegistrationViewDelegate
+
+- (void)closeAllModals
 {
-    NSLog(@"Registering with email: %@; and password %@", email, password);
-    [self.authorizationService registerWithEmail:email andPassword:password];
+    [self dismissViewControllerAnimated:YES completion:nil];
+    [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+//    [self dismissViewControllerAnimated:YES completion:^{
+//        [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+//    }];
 }
 
 
-#pragma mark - AuthorizationServiceRegistrationDelegate
+#pragma mark - ESKCloseDraggableViewDelegate
 
-- (void)registrationUnsuccessWithError:(NSError *)error {
-    [self.registrationView registrationUnsuccessWithMessage:@"network error"];
-}
-
-- (void)registrationUnsuccessWithResponse:(NSDictionary *)errorMessage {
-    [self.registrationView registrationUnsuccessWithMessage:errorMessage[@"error"]];
-}
-
-- (void)registrationSuccessForEmail:(NSString *)email withPassword:(NSString *)password andToken:(NSString *)token {
-    [self.registrationView registrationSuccess];
-    [ESKUserDefaultsHelper addAPIToken:token forEmail:email andPassword:password];
+- (void)closeViewDragged:(CGPoint)translation
+{
+    if (translation.y < 0 )
+    {
+        return;
+    }
+    if (translation.y < CGRectGetHeight(self.view.frame) * 0.6f){
+        self.registrationView.frame = CGRectMake(0, translation.y, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame));
+        return;
+    }
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-
-#pragma mark - ESKCloseViewDelegate
-
-- (void)close
+- (void)draggingDidEnd
 {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [UIView animateWithDuration:0.3f animations:^{
+        self.registrationView.frame = CGRectMake(0, 0, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame));
+    }];
+}
+
+
+#pragma mark - UIContentContainer
+
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
+{
+    [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
+    self.view.frame = CGRectMake(0, 0, size.width, size.height);
 }
 
 @end

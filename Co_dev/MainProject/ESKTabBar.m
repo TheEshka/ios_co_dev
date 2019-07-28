@@ -45,27 +45,27 @@ static NSString * const ESKTabBarReuseIdentifier = @"TabBarCell";
     
 }
 
-- (void)selectDelegatedItemNumber:(NSInteger)num
+- (void)selectDelegatedItemNumber:(NSInteger)number
 {
     self.isDelegatedAction = YES;
-    [self selectItemNumber:num];
+    [self selectItemNumber:number];
     self.isDelegatedAction = NO;
 }
 
 
-- (void)selectItemNumber:(NSInteger)num
+- (void)selectItemNumber:(NSInteger)number
 {
     //проверка границ
-    if ((num >= [self.tabsArray count]) || (num < 0))
+    if ((number >= [self.tabsArray count]) || (number < 0))
     {
         return;
     }
     
-    if (self.previousSelectedItemNumber != num)
+    if (self.previousSelectedItemNumber != number)
     {
         [self.tabBarCollectionView.delegate collectionView:self.tabBarCollectionView didDeselectItemAtIndexPath:[NSIndexPath indexPathForItem:self.previousSelectedItemNumber inSection:0]];\
     }
-    NSIndexPath *indexPath = [NSIndexPath indexPathForItem:num inSection:0];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForItem:number inSection:0];
     [self.tabBarCollectionView.delegate collectionView:self.tabBarCollectionView didSelectItemAtIndexPath:indexPath];
     [self.tabBarCollectionView selectItemAtIndexPath:indexPath animated:YES scrollPosition:0];
 }

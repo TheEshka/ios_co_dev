@@ -7,8 +7,9 @@
 //
 
 #import "ESKAuthenticationView.h"
-#import "ESKAuthenticationProtocol.h"
+#import "ESKAuthenticationProtocols.h"
 #import "ESKTextField.h"
+#import "ESKUser.h"
 
 @interface ESKAuthenticationView ()
 
@@ -20,6 +21,8 @@
 
 @property (nonatomic, strong) UILabel *errorLabel;
 @property (nonatomic, strong) UIActivityIndicatorView *activityView;
+
+@property (nonatomic, strong) UIButton *closeButton;
 
 @end
 
@@ -39,29 +42,33 @@
 
 - (void)loginButtonAction
 {
-    if (self.emailField.text.length == 0 || self.passwordField.text.length == 0)
-    {
-        [self authorizationUnsuccessWithMessage:@"Заполните все поля"];
-        return;
-    }
+    ESKUser *user = [ESKUser new];
+    user.email = self.emailField.text;
+    user.password = self.passwordField.text;
     
     self.loginButton.alpha = 0;
     [self.activityView startAnimating];
-    [self.delegate loginButtonPressedWithEmail:self.emailField.text andPassword:self.passwordField.text];
+    [self.presenter loginButtonPressedWithUserParams:user];
 }
 
 - (void)registrationButtonAction
 {
-    [self.delegate goToRegistrationButtonPressed];
+    [self.delegate registrationButtonPressed];
+}
+
+- (void)closeButtonAction
+{
+    [self.delegate close];
 }
 
 
-#pragma mark - AithorizationViewActivity
+#pragma mark - ESKAuthenticationPresenterDelegate
 
 - (void)authorizationSuccess
 {
     self.loginButton.alpha = 1;
     [self.activityView stopAnimating];
+    [self.delegate close];
 }
 
 - (void)authorizationUnsuccessWithMessage:(NSString *)message
@@ -95,7 +102,7 @@
 {
     if (!_activityView) {
         _activityView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle: UIActivityIndicatorViewStyleGray];
-        _activityView.center = self.registrationButton.center;
+        _activityView.center = self.loginButton.center;
         [self addSubview:_activityView];
     }
     return _activityView;
@@ -131,10 +138,19 @@
     [_registrationButton addTarget:self action:@selector(registrationButtonAction) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_registrationButton];
     
+    _closeButton = [UIButton buttonWithType:UIButtonTypeSystem];
+    _closeButton.backgroundColor = [UIColor colorWithRed:255/255.f green:64/255.f blue:64/255.f alpha:1];
+    [_closeButton setTitle:@"Back" forState:UIControlStateNormal];
+    _closeButton.layer.borderWidth = 2.f;
+    _closeButton.layer.borderColor = [UIColor darkTextColor].CGColor;
+    [_closeButton addTarget:self action:@selector(closeButtonAction) forControlEvents:UIControlEventTouchUpInside];
+    [self addSubview:_closeButton];
+    
     _emailField.translatesAutoresizingMaskIntoConstraints = NO;
     _passwordField.translatesAutoresizingMaskIntoConstraints = NO;
     _loginButton.translatesAutoresizingMaskIntoConstraints = NO;
     _registrationButton.translatesAutoresizingMaskIntoConstraints = NO;
+    _closeButton.translatesAutoresizingMaskIntoConstraints = NO;
     NSArray<NSLayoutConstraint *> *constraints=
     @[
       [_emailField.centerXAnchor constraintEqualToAnchor:self.centerXAnchor],
@@ -150,12 +166,17 @@
       [_loginButton.centerXAnchor constraintEqualToAnchor:self.centerXAnchor],
       [_loginButton.topAnchor constraintEqualToAnchor:_passwordField.bottomAnchor constant:50.f],
       [_loginButton.widthAnchor constraintEqualToConstant:150.f],
-      [_loginButton.heightAnchor constraintEqualToConstant:25.f],
+      [_loginButton.heightAnchor constraintEqualToConstant:35.f],
       
       [_registrationButton.centerXAnchor constraintEqualToAnchor:self.centerXAnchor],
       [_registrationButton.topAnchor constraintEqualToAnchor:_loginButton.bottomAnchor constant:50.f],
       [_registrationButton.widthAnchor constraintEqualToConstant:100.f],
-      [_registrationButton.heightAnchor constraintEqualToConstant:25.f]
+      [_registrationButton.heightAnchor constraintEqualToConstant:35.f],
+      
+      [_closeButton.centerXAnchor constraintEqualToAnchor:self.centerXAnchor],
+      [_closeButton.bottomAnchor constraintEqualToAnchor:self.bottomAnchor constant: -20.f],
+      [_closeButton.widthAnchor constraintEqualToConstant:150],
+      [_closeButton.heightAnchor constraintEqualToConstant:35.f]
       ];
     [self addConstraints:constraints];
 }
@@ -163,7 +184,6 @@
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
     [self endEditing:YES];
-    
 }
 
 @end

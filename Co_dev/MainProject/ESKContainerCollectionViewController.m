@@ -34,11 +34,11 @@ static NSString * const ESKMainReuseIdentifier = @"MainCell";
     [self.viewControllersArray addObject:viewController];
 }
 
-- (void)openViewControllerNumber:(NSInteger)num
+- (void)openViewControllerNumber:(NSInteger)number
 {
-    NSIndexPath *indexPath = [NSIndexPath indexPathForItem:num inSection:0];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForItem:number inSection:0];
     self.disableDelegatedAction = YES;
-    self.delegateViewNumber = num;
+    self.delegateViewNumber = number;
     [self.collectionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
 }
 
@@ -47,7 +47,7 @@ static NSString * const ESKMainReuseIdentifier = @"MainCell";
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return [self.viewControllersArray count];;
+    return [self.viewControllersArray count];
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -84,7 +84,6 @@ static NSString * const ESKMainReuseIdentifier = @"MainCell";
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     NSInteger itemNumber = scrollView.contentOffset.x / CGRectGetWidth(self.collectionView.frame) + 0.5;
-//    NSLog(@"offset: %f,  cell: %ld", scrollView.contentOffset.x, qwe);
     
     //Для случаев когда был вызван от таб бара и не нужно возвращать действие
     if (self.disableDelegatedAction)
@@ -113,6 +112,26 @@ static NSString * const ESKMainReuseIdentifier = @"MainCell";
 {
     return 0;
 }
+
+
+
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
+{
+    [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
+    //[self.view.superview layoutIfNeeded];
+//    self.disableDelegatedAction = YES;
+//    self.delegateViewNumber = -1;
+//    [self.collectionViewController openViewControllerNumber:self.viewControllerNumber];
+    self.collectionView.contentOffset = CGPointMake(self.collectionView.contentOffset.x /size.height *size.width, self.collectionView.contentOffset.y);
+    //self.collectionView.contentOffset.x
+}
+
+//- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
+//{
+//    [super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
+////    [self.collectionViewController openViewControllerNumber:self.viewControllerNumber];
+//    self.disableDelegatedAction = NO;
+//}
 
 
 #pragma mark - Lazy Getters

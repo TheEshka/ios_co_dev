@@ -10,11 +10,13 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ESKUserDefaultsHelper : NSObject
+static NSString *const ESKtokenKey = @"APIToken";
+static NSString *const ESKEmailKey = @"Email";
+static NSString *const ESKPasswordKey = @"Password";
+static NSString *const ESKUserIDKey = @"UserID";
+static NSString *const ESKNameKey = @"Name";
 
-+ (void)addAPIToken:(NSString *)apiToken forEmail:(NSString *)email andPassword:(NSString *)password;
-+ (void)changeAPIToken:(NSString *)apiToken;
-+ (NSString *)getAPIToken;
+@interface ESKUserDefaultsHelper : NSObject
 
 @end
 

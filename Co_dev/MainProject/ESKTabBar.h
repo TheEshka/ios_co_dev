@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, weak)id<ESKTabBarDelegate> delegate;
 
 
-- (void)selectDelegatedItemNumber:(NSInteger)num;
+- (void)selectDelegatedItemNumber:(NSInteger)number;
 
 - (void)addItemWithTitle:(NSString *)title;
 

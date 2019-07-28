@@ -13,3 +13,21 @@ static const CGFloat ESKTextFiledHeight = 200.0;////
 static const CGFloat ESKButtonHeight = 200.0;////
 
 static const CGFloat ESKBetweenOffset = 20.0;
+
+
+
+@interface UIColor (projectColor)
+
++ (UIColor *)ESKBackgroundColor;
+
+@end
+
+@implementation UIColor (projectColor)
+
++ (UIColor *)ESKBackgroundColor{
+    return [UIColor colorWithWhite:0.95 alpha:1];
+}
+
+
+@end
+

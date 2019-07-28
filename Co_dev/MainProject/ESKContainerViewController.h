@@ -14,6 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)addContentViewController:(UIViewController *)viewController forTitle:(NSString *)title;
 
+- (void)setStartViewController:(NSInteger)number;
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -14,6 +14,7 @@
 
 @property (nonatomic, strong) ESKContainerCollectionViewController *collectionViewController;
 @property (nonatomic, strong) ESKTabBar *tabBar;
+@property (nonatomic, assign) NSInteger viewControllerNumber;
 
 @end
 
@@ -24,8 +25,10 @@
 {
     self = [super init];
     if (self) {
+        self.view.backgroundColor = [UIColor whiteColor];
         [self setupContainerCollectionView];
         [self setupTapBar];
+        self.definesPresentationContext = YES;
     }
     return self;
 }
@@ -36,7 +39,8 @@
 
 - (void)viewDidAppear:(BOOL)animated
 {
-    [self.tabBar selectItemNumber:1];
+    self.viewControllerNumber = 0;
+    [self.tabBar selectItemNumber:self.viewControllerNumber];
     [super viewDidAppear:YES];
 }
 
@@ -51,6 +55,11 @@
     
 }
 
+- (void)setStartViewController:(NSInteger)number
+{
+    self.viewControllerNumber = number;
+}
+
 
 #pragma mark - Helper Setup Methods
 
@@ -58,13 +67,17 @@
 {
     self.collectionViewController.view.translatesAutoresizingMaskIntoConstraints = NO;
     self.tabBar.view.translatesAutoresizingMaskIntoConstraints = NO;
+    CGFloat barHeight = CGRectGetHeight([UIApplication sharedApplication].statusBarFrame);
     NSArray<NSLayoutConstraint *> *constraints=
     @[
-      [self.collectionViewController.view.topAnchor constraintEqualToAnchor:self.view.topAnchor],
+      [self.collectionViewController.view.topAnchor constraintEqualToAnchor:self.view.topAnchor constant:barHeight],
       [self.collectionViewController.view.leadingAnchor constraintEqualToAnchor:self.view.leadingAnchor],
       [self.collectionViewController.view.trailingAnchor constraintEqualToAnchor:self.view.trailingAnchor],
       [self.collectionViewController.view.bottomAnchor constraintEqualToAnchor:self.tabBar.view.topAnchor],
+//      [self.collectionViewController.view.heightAnchor constraintEqualToAnchor:self.view.heightAnchor multiplier:0.85],
       
+      
+//      [self.tabBar.view.topAnchor constraintEqualToAnchor:self.collectionViewController.view.bottomAnchor],
       [self.tabBar.view.heightAnchor constraintEqualToConstant:100.0f],
       [self.tabBar.view.leadingAnchor constraintEqualToAnchor:self.view.leadingAnchor],
       [self.tabBar.view.trailingAnchor constraintEqualToAnchor:self.view.trailingAnchor],
@@ -79,7 +92,6 @@
     self.tabBar = [[ESKTabBar alloc] init];
     [self addChildViewController:self.tabBar];
     [self.tabBar didMoveToParentViewController:self];
-    //self.tabBar.view.frame = CGRectMake(0, CGRectGetHeight(self.view.frame) * 0.9f, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame) * 0.1f);
     [self.view addSubview:self.tabBar.view];
     self.tabBar.delegate = self;
 }
@@ -89,7 +101,6 @@
     self.collectionViewController = [[ESKContainerCollectionViewController alloc] init];
     [self addChildViewController:self.collectionViewController];
     [self.collectionViewController didMoveToParentViewController:self];
-    //self.collectionViewController.view.frame = CGRectMake(0, 0, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame) * 0.9f);
     [self.view addSubview:self.collectionViewController.view];
     self.collectionViewController.delegate = self;
 }
@@ -97,17 +108,33 @@
 
 #pragma mark - ESKTabBarDelegate
 
-- (void)selectedBarItemNumber:(NSInteger)num
+- (void)selectedBarItemNumber:(NSInteger)number
 {
-    [self.collectionViewController openViewControllerNumber:num];
+    self.viewControllerNumber = number;
+    [self.collectionViewController openViewControllerNumber:number];
 }
 
 
 #pragma mark - ESKContainerCollectionViewControllerDelegate
 
-- (void)collectionViewChangedPageTo:(NSInteger)num
+- (void)collectionViewChangedPageTo:(NSInteger)number
 {
-    [self.tabBar selectDelegatedItemNumber:num];
+    self.viewControllerNumber = number;
+    [self.tabBar selectDelegatedItemNumber:number];
 }
+
+
+//- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
+//{
+//    [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
+//    //[self.view.superview layoutIfNeeded];
+//    [self.collectionViewController openViewControllerNumber:self.viewControllerNumber];
+//}
+//
+//- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
+//{
+//    [super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
+//    [self.collectionViewController openViewControllerNumber:self.viewControllerNumber];
+//}
 
 @end

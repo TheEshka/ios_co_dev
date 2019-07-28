@@ -15,12 +15,12 @@
 
 @protocol ESKTabBarCollectionViewGestureDelegate <NSObject>
 
-- (void)selectItemNumber:(NSInteger)num;
+- (void)selectItemNumber:(NSInteger)number;
 
 @end
 
 @protocol ESKTabBarDelegate <NSObject>
 
-- (void)selectedBarItemNumber:(NSInteger)num;
+- (void)selectedBarItemNumber:(NSInteger)number;
 
 @end

@@ -11,8 +11,8 @@
 /**
  Tells the delegate that containetCollectonView page has changed to another item
 
- @param num item number starting from 0
+ @param number item number starting from 0
  */
-- (void)collectionViewChangedPageTo:(NSInteger)num;
+- (void)collectionViewChangedPageTo:(NSInteger)number;
 
 @end

@@ -7,16 +7,21 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ESKRegistrationProtocol.h"
+#import "ESKRegistrationProtocols.h"
 #import "ESKAuthorizationServiceProtocol.h"
+#import "ESKCloseViewProtocol.h"
 
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ESKRegistrationView : UIView<ESKRegistrationViewActivity>
+@interface ESKRegistrationView : UIView<ESKRegistrationPresenterDelegate>
 
 
-@property (nonatomic, weak) id<ESKRegistrationViewDelegate> delegate;/**< Object that act as delegate of RegistrationView action*/
+@property (nonatomic, weak) id<ESKCloseDraggableViewDelegate> closeDelegate;/**< Object that act as delegate of ESKCloseDraggableView*/
+
+@property (nonatomic, weak) id<ESKRegistrationViewDelegate> delegate;
+
+@property (nonatomic, strong) id<ESKRegistrationViewPresenter> presenter;
 
 @end
 

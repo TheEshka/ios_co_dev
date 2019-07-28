@@ -8,6 +8,15 @@
 
 @protocol ESKProfileViewDelegate <NSObject>
 
-- (void)openAuthorizationPage;
+- (void)exitButtonPressed;
+
+
+@end
+
+
+@protocol ESKProfileViewPresenter <NSObject>
+
+- (BOOL)isCustomerAuthorized;
+- (void)deleteUserData;
 
 @end

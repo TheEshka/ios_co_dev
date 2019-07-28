@@ -6,24 +6,34 @@
 //  Copyright © 2019 Gagik Avetisyan. All rights reserved.
 //
 
-@protocol ESKAuthenticationViewDelegate <NSObject>
+@class ESKUser;
 
+@protocol ESKAuthenticationViewPresenter <NSObject>
 /**
  Tells delegate that login button was pressed and pass login and password from text fields
 
- @param email text from login text field
- @param password text from login text field
+ @param user Object ESKUser with params from AuthenticationView
  */
-- (void)loginButtonPressedWithEmail:(NSString *)email andPassword:(NSString *)password;
-
-/**
- Tells delegate that registration button was pressed
- */
-- (void)goToRegistrationButtonPressed;
+- (void)loginButtonPressedWithUserParams:(ESKUser *)user;
 
 @end
 
-@protocol ESKAuthenticationViewActivity <NSObject>
+
+@protocol ESKAuthenticationViewDelegate <NSObject>
+/**
+ Tells delegate that registration button was pressed
+ */
+- (void)registrationButtonPressed;
+
+/**
+ Tells delegate to close him
+ */
+- (void)close;
+
+@end
+
+
+@protocol ESKAuthenticationPresenterDelegate <NSObject>
 
 /**
  Actions of AuthorizationView for successful registration

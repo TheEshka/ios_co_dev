@@ -26,9 +26,11 @@ NS_ASSUME_NONNULL_BEGIN
 /**
 Method for moving to needed page. Celled from from ESKContainerViewController for synchronize TabBar page and collectionView cell
 
- @param num page number starting from 0
+ @param number page number starting from 0
  */
-- (void)openViewControllerNumber:(NSInteger)num;
+- (void)openViewControllerNumber:(NSInteger)number;
+
+
 
 @end
 

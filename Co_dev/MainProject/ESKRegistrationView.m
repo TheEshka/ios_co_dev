@@ -9,19 +9,21 @@
 #import "ESKRegistrationView.h"
 #import "ESKTextField.h"
 #import "ESKConstants.h"
-#import "ESKCloseView.h"
+#import "ESKDraggingCloseView.h"
+#import "ESKUser.h"
 
 
 @interface ESKRegistrationView ()
 
 @property (nonatomic, strong) ESKTextField *emailField;
+@property (nonatomic, strong) ESKTextField *nameField;
 @property (nonatomic, strong) ESKTextField *passwordField;
 @property (nonatomic, strong) UIButton *registrationButton;
 
 @property (nonatomic, strong) UILabel *errorLabel;
 @property (nonatomic, strong) UIActivityIndicatorView *activityView;
 
-@property (nonatomic, strong) ESKCloseView *closeView;
+@property (nonatomic, strong) ESKDraggingCloseView *closeView;
 
 @end
 
@@ -40,25 +42,25 @@
 
 - (void)registrationButtonAction
 {
-    if (self.emailField.text.length == 0 || self.passwordField.text.length == 0)
-    {
-        [self registrationUnsuccessWithMessage:@"Заполните все поля"];
-        return;
-    }
-    
     self.registrationButton.alpha = 0;
     [self.activityView startAnimating];
-    [self.delegate registrationButtonPressedWithEmail:self.emailField.text
-                                          andPassword:self.passwordField.text];
+    
+    ESKUser *user = [ESKUser new];
+    user.name = self.nameField.text;
+    user.email = self.emailField.text;
+    user.password = self.passwordField.text;
+    [self.presenter registrationButtonPressedWithUserParams:user];
 }
 
 
-#pragma mark - ESKRegistrationViewActivity
+#pragma mark - ESKRegistrationPresenterDelegate
 
 - (void)registrationSuccess
 {
     self.registrationButton.alpha = 1;
     [self.activityView stopAnimating];
+    
+    [self.delegate closeAllModals];
 }
 
 - (void)registrationUnsuccessWithMessage:(NSString *)message
@@ -106,9 +108,9 @@
 {
     self.clipsToBounds = YES;
     self.layer.cornerRadius = 50.0f;
+    self.backgroundColor = [UIColor yellowColor];
+    self.layer.cornerRadius = 100;
     self.layer.maskedCorners = kCALayerMinXMinYCorner | kCALayerMaxXMinYCorner;
-    
-    self.backgroundColor = [UIColor whiteColor];
     
     _registrationButton = [UIButton buttonWithType:UIButtonTypeSystem];
     [_registrationButton setTitle:@"Register" forState:UIControlStateNormal];
@@ -122,30 +124,42 @@
     _emailField.placeholder = @"E-mail";
     [self addSubview:_emailField];
     
+    _nameField = [[ESKTextField alloc] initWithFrame:CGRectZero];
+    _nameField.borderStyle = 3;
+    _nameField.placeholder = @"Nickname";
+    [self addSubview:_nameField];
+    
     _passwordField = [[ESKTextField alloc] initWithFrame:CGRectZero];
     _passwordField.borderStyle = 3;
     _passwordField.placeholder = @"Password";
     _passwordField.secureTextEntry = YES;
     [self addSubview:_passwordField];
     
-    _closeView = [[ESKCloseView alloc] init];
-    _closeView.backgroundColor = [UIColor clearColor];
+    _closeView = [[ESKDraggingCloseView alloc] init];
+//    _closeView.delegate =
     [self addSubview:_closeView];
     
     _closeView.translatesAutoresizingMaskIntoConstraints = NO;
     _emailField.translatesAutoresizingMaskIntoConstraints = NO;
+    _nameField.translatesAutoresizingMaskIntoConstraints = NO;
     _passwordField.translatesAutoresizingMaskIntoConstraints = NO;
     _registrationButton.translatesAutoresizingMaskIntoConstraints = NO;
+    
+    CGFloat statusBarHeight = CGRectGetHeight([UIApplication sharedApplication].statusBarFrame);
     NSArray<NSLayoutConstraint *> *constraints=
     @[
-      [_closeView.topAnchor constraintEqualToAnchor:self.topAnchor constant:20],
+      [_closeView.topAnchor constraintEqualToAnchor:self.topAnchor constant:statusBarHeight + 10],
       [_closeView.heightAnchor constraintEqualToConstant:30],
       [_closeView.centerXAnchor constraintEqualToAnchor:self.centerXAnchor],
       [_closeView.widthAnchor constraintEqualToAnchor:self.widthAnchor],
       
       [_emailField.centerXAnchor constraintEqualToAnchor:self.centerXAnchor],
-      [_emailField.bottomAnchor constraintEqualToAnchor:_passwordField.topAnchor constant:-ESKBetweenOffset],
+      [_emailField.bottomAnchor constraintEqualToAnchor:_nameField.topAnchor constant:-ESKBetweenOffset],
       [_emailField.widthAnchor constraintEqualToConstant:ESKTextFiledWidth],
+      
+      [_nameField.centerXAnchor constraintEqualToAnchor:self.centerXAnchor],
+      [_nameField.bottomAnchor constraintEqualToAnchor:_passwordField.topAnchor constant:-ESKBetweenOffset],
+      [_nameField.widthAnchor constraintEqualToConstant:ESKTextFiledWidth],
       
       [_passwordField.centerXAnchor constraintEqualToAnchor:self.centerXAnchor],
       [_passwordField.bottomAnchor constraintEqualToAnchor:self.centerYAnchor constant:-ESKBetweenOffset],
@@ -159,17 +173,23 @@
 }
 
 
+#pragma mark - Overrided Getter/Setter
+
+- (void)setCloseDelegate:(id<ESKCloseDraggableViewDelegate>)closeDelegate
+{
+    _closeView.delegate = closeDelegate;
+}
+
+- (id<ESKCloseDraggableViewDelegate>)closeDelegate
+{
+    return _closeView.delegate;
+}
+
+
+
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
     [self endEditing:YES];
 }
-
-
-- (void)setDelegate:(id<ESKRegistrationViewDelegate>)delegate
-{
-    _delegate = delegate;
-    _closeView.delegate = delegate;
-}
-
 
 @end

@@ -7,9 +7,10 @@
 //
 
 #import "ESKAuthorizationService.h"
+#import "ESKUser.h"
 
-#define AUTHORIZATION_REQUEST 1
-#define REGISTRATION_REQUEST 2
+//#define AUTHORIZATION_REQUEST 1
+//#define REGISTRATION_REQUEST 2
 
 @interface ESKAuthorizationService ()<NSURLSessionDataDelegate, NSURLSessionTaskDelegate>
 
@@ -19,18 +20,24 @@
 
 @implementation ESKAuthorizationService
 
++ (ESKAuthorizationService *)sharedInstance {
+    static ESKAuthorizationService *sharedInstance = nil;
+    static dispatch_once_t onceToken; // onceToken = 0
+    dispatch_once(&onceToken, ^{
+        sharedInstance = [[self alloc] init];
+        NSURLSessionConfiguration *sessionConfiguration = [NSURLSessionConfiguration defaultSessionConfiguration];
+        [sessionConfiguration setAllowsCellularAccess:YES];
+        [sessionConfiguration setHTTPAdditionalHeaders:@{ @"Accept" : @"application/json" }];
+        sharedInstance.urlSession = [NSURLSession sessionWithConfiguration:sessionConfiguration delegate:sharedInstance delegateQueue:nil];
+    });
+    
+    return sharedInstance;
+}
+
 
 #pragma mark ESKAuthorizationServiceIntputProtocol
 
-- (void)configureUrlSessionWithParams:(NSDictionary *)params
-{
-    NSURLSessionConfiguration *sessionConfiguration = [NSURLSessionConfiguration defaultSessionConfiguration];
-    [sessionConfiguration setAllowsCellularAccess:YES];
-    [sessionConfiguration setHTTPAdditionalHeaders:params];
-    self.urlSession = [NSURLSession sessionWithConfiguration:sessionConfiguration delegate:self delegateQueue:nil];
-}
-
-- (void)authorizeWithEmail:(NSString *)email andPassword:(NSString *)password
+- (void)authorizeWithUserParams:(ESKUser *)user
 {
     NSString *authURL = @"http://127.0.0.1:8080/api/login";
     
@@ -40,8 +47,8 @@
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     [request setTimeoutInterval:15];
     NSDictionary *requestBody = @{
-                                  @"email": email,
-                                  @"password": password
+                                  @"email": user.email,
+                                  @"password": user.password
                                   };
     [request setHTTPBody: [NSJSONSerialization dataWithJSONObject:requestBody options:kNilOptions error:nil]];
     
@@ -72,11 +79,12 @@
             return;
         }
         
-        NSString *token = ((NSHTTPURLResponse *)response).allHeaderFields[@"Authorization"];
+        user.apiToken = ((NSHTTPURLResponse *)response).allHeaderFields[@"Authorization"];
+        user.email = responseDictionary[@"email"];
+        user.name = responseDictionary[@"name"];
+        user.userID = responseDictionary[@"id"];
         dispatch_async(dispatch_get_main_queue(), ^{
-            [self.authorizationDelegate authorizationSuccessForEmail:responseDictionary[@"email"]
-                                                      withPassword:password
-                                                          andToken:token];
+            [self.authorizationDelegate authorizationSuccessForUser:user];
         });
         
     }];
@@ -84,7 +92,9 @@
     [authTask resume];
 }
 
-- (void)registerWithEmail:(NSString *)email andPassword:(NSString *)password {
+- (void)registerWithUserParams:(ESKUser *)user
+//- (void)registerWithEmail:(NSString *)email andPassword:(NSString *)password
+{
     NSString *authURL = @"http://127.0.0.1:8080/api/register";
     
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
@@ -93,8 +103,9 @@
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     [request setTimeoutInterval:15];
     NSDictionary *requestBody = @{
-                                  @"email": email,
-                                  @"password": password
+                                  @"email": user.email,
+                                  @"name": user.name,
+                                  @"password": user.password
                                   };
     [request setHTTPBody: [NSJSONSerialization dataWithJSONObject:requestBody options:kNilOptions error:nil]];
     
@@ -125,11 +136,11 @@
             return;
         }
         
-        NSString *token = ((NSHTTPURLResponse *)response).allHeaderFields[@"Authorization"];
+        user.email = responseDictionary[@"email"];
+        user.userID = responseDictionary[@"id"];
+        user.apiToken = ((NSHTTPURLResponse *)response).allHeaderFields[@"Authorization"];
         dispatch_async(dispatch_get_main_queue(), ^{
-            [self.registrationDelegate registrationSuccessForEmail:responseDictionary[@"email"]
-                                                      withPassword:password
-                                                          andToken:token];
+            [self.registrationDelegate registrationSuccessForUser:user];
         });
     }];
     [registrationTask resume];
