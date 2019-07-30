@@ -8,6 +8,7 @@
 
 #import "ESKArcView.h"
 #import "ESKConstants.h"
+#import "UIColor+ESKProjectColor.h"
 
 @implementation ESKArcView
 
@@ -35,7 +36,7 @@
     [path addLineToPoint:CGPointMake(0, height)];
     [path closePath];
     
-    [UIColor.ESKBackgroundColor setFill];
+    [UIColor.esk_BackgroundColor setFill];
     [path fill];
 }
 

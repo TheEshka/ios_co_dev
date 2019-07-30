@@ -8,7 +8,16 @@
 
 @protocol ESKCloseDraggableViewDelegate <NSObject>
 
+/**
+ Tells to delegate that View is Dragging
+
+ @param translation CGPoint from start of dragging point
+ */
 - (void)closeViewDragged:(CGPoint)translation;
+
+/**
+ Tells to delegate that user end pressing view
+ */
 - (void)draggingDidEnd;
 
 @end

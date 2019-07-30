@@ -8,6 +8,7 @@
 
 #import "ESKWallCollectionView.h"
 #import "ESKConstants.h"
+#import "UIColor+ESKProjectColor.h"
 
 @implementation ESKWallCollectionView
 
@@ -17,7 +18,7 @@
 {
     self = [super initWithFrame:CGRectZero collectionViewLayout:[self setupLayout]];
     if (self) {
-        self.backgroundColor = [UIColor ESKBackgroundColor];
+        self.backgroundColor = [UIColor esk_BackgroundColor];
         self.contentInset = UIEdgeInsetsMake(15, 0, 0, 0);
         self.scrollIndicatorInsets = UIEdgeInsetsMake(15, 0, 0, 0);
         self.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentAlways;

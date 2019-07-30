@@ -12,7 +12,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface ESKRegistrationViewController : UIViewController
 
-
 @end
 
 NS_ASSUME_NONNULL_END

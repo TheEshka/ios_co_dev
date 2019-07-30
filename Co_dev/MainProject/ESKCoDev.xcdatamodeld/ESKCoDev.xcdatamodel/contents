@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14490.99" systemVersion="18F132" minimumToolsVersion="Automatic" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
+    <entity name="Image" representedClassName="Image" syncable="YES">
+        <attribute name="image" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="imageID" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="postImage" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Post" inverseName="image" inverseEntity="Post" syncable="YES"/>
+        <relationship name="userImage" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="image" inverseEntity="User" syncable="YES"/>
+    </entity>
+    <entity name="Post" representedClassName="Post" syncable="YES">
+        <attribute name="createdAt" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="members" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="membersRequest" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="postAuthor" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="postDescription" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="postID" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="postImageID" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="postSubject" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="postTitle" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="author" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="postAuthor" inverseEntity="User" syncable="YES"/>
+        <relationship name="image" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Image" inverseName="postImage" inverseEntity="Image" syncable="YES"/>
+        <relationship name="member" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="User" inverseName="postMembers" inverseEntity="User" syncable="YES"/>
+        <relationship name="memberRequest" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="User" inverseName="postRequests" inverseEntity="User" syncable="YES"/>
+    </entity>
+    <entity name="User" representedClassName="User" syncable="YES">
+        <attribute name="aboutMe" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="age" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="city" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="githubLink" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="imageID" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="userID" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="image" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Image" inverseName="userImage" inverseEntity="Image" syncable="YES"/>
+        <relationship name="postAuthor" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Post" inverseName="author" inverseEntity="Post" syncable="YES"/>
+        <relationship name="postMembers" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Post" inverseName="member" inverseEntity="Post" syncable="YES"/>
+        <relationship name="postRequests" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Post" inverseName="memberRequest" inverseEntity="Post" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Post" positionX="-92.99609375" positionY="37.37890625" width="128" height="238"/>
+        <element name="User" positionX="206.8671875" positionY="121.10546875" width="128" height="223"/>
+        <element name="Image" positionX="101.046875" positionY="-4.265625" width="128" height="103"/>
+    </elements>
+</model>

@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  Delegate implement methods from authorization service for registration requests
  */
-@property (nonatomic, weak) id<ESKAuthorizationServiceAuthethicationDelegate> authorizationDelegate;
+@property (nonatomic, nullable, weak) id<ESKAuthorizationServiceAuthethicationDelegate> authorizationDelegate;
 
 /**
  Delegate implement methods from authorization service for authorization requests

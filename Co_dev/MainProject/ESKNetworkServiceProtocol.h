@@ -6,22 +6,33 @@
 //  Copyright © 2019 Gagik Avetisyan. All rights reserved.
 //
 
-@protocol NetworkServiceOutputProtocol <NSObject>
+@protocol NetworkServiceWallOutputProtocol <NSObject>
 
-- (void)loadingPhotoContinuesWithProgress:(double)progress;
-- (void)loadingPhotoIsDoneWithData:(NSData *)data  forIndexPathNumber:(NSInteger)num;
+- (void)downloadFromCoreData;
 
-- (void)searchingIsDoneWithResult:(NSDictionary *)searchResult;
+- (void)postsDidDowload:(NSDictionary *)postsDictionary;
+
+- (void)loadingPhotoIsDoneWithData:(NSData *)data forPhotoID:(NSString *)photoID;
+
+- (void)getWrongTokenResponseWithCompilition:(void (^)(void))complition;
+
 
 @end
 
+
+@protocol NetworkServiceTeamOutputProtocol <NSObject>
+
+- (void)teamDidDownload:(NSDictionary *)postDictionary;
+
+@end
+
+@class ESKPost;
 @protocol NetworkServiceIntputProtocol <NSObject>
-@optional
 
-- (void)configureUrlSessionWithParams:(NSDictionary *)params;
+- (void)downloadPostsWithOffset:(NSInteger)offset limit:(NSInteger)limit;
 
-- (void)getPostWithOffset:(NSInteger)offset limit:(NSInteger)limit;
+- (void)downloadImageWithID:(NSString *)photoID;
 
-//- (void)downloadPhotoWithParams:(PhotoDetails *)params forIndexPathNumber:(NSInteger)num;
+- (void)getTeam;
 
 @end

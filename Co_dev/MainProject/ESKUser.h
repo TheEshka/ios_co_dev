@@ -10,13 +10,15 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ESKUser : NSObject
+@interface ESKUser : NSObject<NSSecureCoding>
 
-@property (nonatomic, strong) NSString *userID;
-@property (nonatomic, strong) NSString *email;
-@property (nonatomic, strong) NSString *name;
-@property (nonatomic, strong) NSString *password;
-@property (nonatomic, strong) NSString *apiToken;
+@property (nonatomic, copy) NSString *userID;
+@property (nonatomic, copy) NSString *email;
+@property (nonatomic, copy) NSString *name;
+@property (nonatomic, copy) NSString *password;
+@property (nonatomic, copy) NSString *apiToken;
+
++ (ESKUser *)userFromDictionary:(NSDictionary *)dictionary;
 
 @end
 

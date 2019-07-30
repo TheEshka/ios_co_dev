@@ -7,13 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Post.h"
+#import "ESKPost.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface ESKWallPostCell : UICollectionViewCell
 
-@property (nonatomic, strong) Post *post;
+@property (nonatomic, strong) ESKPost *post;
+
+- (void)setImage:(UIImage *)image;
 
 @end
 

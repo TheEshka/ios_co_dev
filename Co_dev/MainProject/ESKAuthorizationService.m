@@ -8,9 +8,7 @@
 
 #import "ESKAuthorizationService.h"
 #import "ESKUser.h"
-
-//#define AUTHORIZATION_REQUEST 1
-//#define REGISTRATION_REQUEST 2
+#import "ESKNetworkHelper.h"
 
 @interface ESKAuthorizationService ()<NSURLSessionDataDelegate, NSURLSessionTaskDelegate>
 
@@ -27,7 +25,6 @@
         sharedInstance = [[self alloc] init];
         NSURLSessionConfiguration *sessionConfiguration = [NSURLSessionConfiguration defaultSessionConfiguration];
         [sessionConfiguration setAllowsCellularAccess:YES];
-        [sessionConfiguration setHTTPAdditionalHeaders:@{ @"Accept" : @"application/json" }];
         sharedInstance.urlSession = [NSURLSession sessionWithConfiguration:sessionConfiguration delegate:sharedInstance delegateQueue:nil];
     });
     
@@ -39,15 +36,13 @@
 
 - (void)authorizeWithUserParams:(ESKUser *)user
 {
-    NSString *authURL = @"http://127.0.0.1:8080/api/login";
-    
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-    [request setURL:[NSURL URLWithString:authURL]];
+    [request setURL:[NSURL URLWithString:[ESKNetworkHelper autorizationURL]]];
     [request setHTTPMethod:@"POST"];
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     [request setTimeoutInterval:15];
     NSDictionary *requestBody = @{
-                                  @"email": user.email,
+                                  @"email": user.email ?: @"",
                                   @"password": user.password
                                   };
     [request setHTTPBody: [NSJSONSerialization dataWithJSONObject:requestBody options:kNilOptions error:nil]];
@@ -62,15 +57,6 @@
         }
         
         NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
-        if (error) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self.authorizationDelegate authorizationUnsuccessWithResponse:@{
-                                                                  @"error": @"Server response json error",
-                                                                  }];
-            });
-            return;
-        }
-
         if ( ((NSHTTPURLResponse *)response).statusCode != 200 )
         {
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -93,12 +79,9 @@
 }
 
 - (void)registerWithUserParams:(ESKUser *)user
-//- (void)registerWithEmail:(NSString *)email andPassword:(NSString *)password
 {
-    NSString *authURL = @"http://127.0.0.1:8080/api/register";
-    
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-    [request setURL:[NSURL URLWithString:authURL]];
+    [request setURL:[NSURL URLWithString:[ESKNetworkHelper registrationURL]]];
     [request setHTTPMethod:@"POST"];
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     [request setTimeoutInterval:15];
@@ -119,16 +102,7 @@
         }
         
         NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
-        if (error) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self.registrationDelegate registrationUnsuccessWithResponse:@{
-                                                                  @"error": @"Server response json error",
-                                                                  }];
-            });
-            return;
-        }
-        
-        if ( ((NSHTTPURLResponse *)response).statusCode != 201 )
+        if ( ((NSHTTPURLResponse *)response).statusCode != 201)
         {
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self.registrationDelegate registrationUnsuccessWithResponse:responseDictionary];
@@ -145,57 +119,5 @@
     }];
     [registrationTask resume];
 }
-
-
-
-//#pragma mark - NSURLSessionTaskDelegate
-//
-//- (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task
-//didCompleteWithError:(nullable NSError *)error
-//{
-//    dispatch_async(dispatch_get_main_queue(), ^{
-//        [self.authorizationDelegate authorizationUnsuccessWithError: error];
-//    });
-//    return;
-//}
-//
-//
-//#pragma mark - NSURLSessionDataDelegate
-//
-//- (void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask
-//didReceiveResponse:(NSURLResponse *)response
-// completionHandler:(void (^)(NSURLSessionResponseDisposition disposition))completionHandler
-//{
-//    
-//}
-//
-//
-//- (void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask
-//    didReceiveData:(NSData *)data
-//{
-//    NSError *error;
-//    NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
-//    if (error) {
-//        dispatch_async(dispatch_get_main_queue(), ^{
-//            [self.output authorizationUnsuccessWithResponse:@{
-//                                                              @"error": @"Server error",
-//                                                              }];
-//        });
-//        return;
-//    }
-//    
-//    NSHTTPURLResponse *response =(NSHTTPURLResponse *)dataTask.response;
-//    if (response.statusCode != 200  && response.statusCode != 201)
-//    {
-//        dispatch_async(dispatch_get_main_queue(), ^{
-//            [self.output authorizationUnsuccessWithResponse:responseDictionary];
-//        });
-//        return;
-//    }
-//    
-//    dispatch_async(dispatch_get_main_queue(), ^{
-//        [self.output authorizationSuccessWithResponse:responseDictionary andHeaders:response.allHeaderFields];
-//    });
-//}
 
 @end

@@ -7,7 +7,8 @@
 //
 
 #import "ESKProfilePresenter.h"
-#import "ESKUserDefaultsHelper.h"
+#import "ESKUserDefaultsConstants.h"
+#import "ESKUser.h"
 
 @implementation ESKProfilePresenter
 
@@ -18,6 +19,15 @@
         return NO;
     }
     return YES;
+}
+
+- (ESKUser *)getProfileInfo
+{
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    ESKUser *user = [ESKUser new];
+    user.name = [userDefaults objectForKey:ESKNameKey];
+    user.email = [userDefaults objectForKey:ESKEmailKey];
+    return user;
 }
 
 - (void)deleteUserData

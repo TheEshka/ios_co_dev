@@ -61,11 +61,6 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (void)dismissViewControllerAnimated:(BOOL)flag completion:(void (^)(void))completion
-{
-    [super dismissViewControllerAnimated:flag completion:completion];
-}
-
 
 #pragma mark - UIContentContainer
 
@@ -73,6 +68,13 @@
 {
     [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
     self.view.frame = CGRectMake(0, 0, size.width, size.height);
+}
+
+- (void)dismissViewControllerAnimated:(BOOL)flag completion:(void (^)(void))completion
+{
+    [super dismissViewControllerAnimated:flag completion:completion];
+    
+    [NSNotificationCenter.defaultCenter postNotificationName:@"dissMissVC" object:nil];
 }
 
 @end

@@ -13,7 +13,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface ESKNetworkService : NSObject<NetworkServiceIntputProtocol>
 
-@property (nonatomic, weak) id<NetworkServiceOutputProtocol> output; /**<  */
+@property (nonatomic, strong) NSString *apiToken;
+
+@property (nonatomic, weak) id<NetworkServiceWallOutputProtocol> wallOutput; /**<  */
+
+@property (nonatomic, weak) id<NetworkServiceTeamOutputProtocol> teamOutpur;
 
 /**
  Singleton of ESKNetworkService

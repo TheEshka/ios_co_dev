@@ -6,28 +6,24 @@
 //  Copyright © 2019 Gagik Avetisyan. All rights reserved.
 //
 
-static const CGFloat ESKTextFiledWidth = 200.0;
-static const CGFloat ESKButtonWidth = 200.0;
 
-static const CGFloat ESKTextFiledHeight = 200.0;////
-static const CGFloat ESKButtonHeight = 200.0;////
+static const CGFloat ESKTopOffset = 10.0f;
+
+static const CGFloat ESKStandartButtonHeight = 40.0f;
+static const CGFloat ESKStandartButtonWidth = 200.0;
+static const CGFloat ESKStandartButtonOffset = 50.0;
+
+static const CGFloat ESKStandartTextFiledWidth = 200.0;
+static const CGFloat ESKStandartTextFiledHeight = 40.0;
+
+static const CGFloat ESKCloseViewWidthMultiplier = 0.6f;
+static const CGFloat ESKCloseViewHeight = 30.0f;
+static const CGFloat ESKCloseViewHeightInside = 3.0f;
 
 static const CGFloat ESKBetweenOffset = 20.0;
 
 
-
-@interface UIColor (projectColor)
-
-+ (UIColor *)ESKBackgroundColor;
-
-@end
-
-@implementation UIColor (projectColor)
-
-+ (UIColor *)ESKBackgroundColor{
-    return [UIColor colorWithWhite:0.95 alpha:1];
-}
-
-
-@end
-
+typedef NS_ENUM(NSInteger, ESKMyTeamRequest) {
+    ESKAccessRequest = 0,
+    ESKDeniedRequest = 1,
+};

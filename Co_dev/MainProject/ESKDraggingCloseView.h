@@ -13,9 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface ESKDraggingCloseView : UIView
 
-@property (nonatomic, strong) id<ESKCloseDraggableViewDelegate> delegate;
-
-//- (void)addTarget:(nullable id)target forAction:(SEL)action;
+@property (nonatomic, weak) id<ESKCloseDraggableViewDelegate> delegate;
 
 @end
 

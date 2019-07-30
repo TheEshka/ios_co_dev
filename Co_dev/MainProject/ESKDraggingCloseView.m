@@ -7,16 +7,7 @@
 //
 
 #import "ESKDraggingCloseView.h"
-
-@interface ESKDraggingCloseView()
-
-@property SEL action;
-@property id target;
-
-@end
-
-static const CGFloat ESKCloseViewWidthMultiplier = 0.6f;
-static const CGFloat ESKCloseViewHeight = 3.0f;
+#import "ESKConstants.h"
 
 @implementation ESKDraggingCloseView
 
@@ -26,14 +17,14 @@ static const CGFloat ESKCloseViewHeight = 3.0f;
     if (self) {
         UIView *lineView = [[UIView alloc] initWithFrame:CGRectZero];
         lineView.backgroundColor = [UIColor blackColor];
-        lineView.layer.cornerRadius = ESKCloseViewHeight/2;
+        lineView.layer.cornerRadius = ESKCloseViewHeightInside/2;
         [self addSubview:lineView];
         
         lineView.translatesAutoresizingMaskIntoConstraints = NO;
         [lineView.centerXAnchor constraintEqualToAnchor:self.centerXAnchor].active = YES;
         [lineView.centerYAnchor constraintEqualToAnchor:self.centerYAnchor].active = YES;
         [lineView.widthAnchor constraintEqualToAnchor:self.widthAnchor multiplier:ESKCloseViewWidthMultiplier].active = YES;
-        [lineView.heightAnchor constraintEqualToConstant:ESKCloseViewHeight].active = YES;
+        [lineView.heightAnchor constraintEqualToConstant:ESKCloseViewHeightInside].active = YES;
         
         UIPanGestureRecognizer *dragGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panGestureAction:)];
         [self addGestureRecognizer:dragGesture];

@@ -9,11 +9,17 @@
 #import <UIKit/UIKit.h>
 #import "ESKProfileViewProtocols.h"
 
+@class ESKUser;
+
+
 NS_ASSUME_NONNULL_BEGIN
+
 
 @interface ESKProfileView : UIView
 
 @property (nonatomic, strong) id<ESKProfileViewDelegate> delegate;
+
+- (void)setUser:(ESKUser *)user;
 
 @end
 

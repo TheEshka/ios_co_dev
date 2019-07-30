@@ -50,6 +50,8 @@
     user.email = self.emailField.text;
     user.password = self.passwordField.text;
     [self.presenter registrationButtonPressedWithUserParams:user];
+    
+    [self endEditing:YES];
 }
 
 
@@ -107,8 +109,7 @@
 - (void)createUI
 {
     self.clipsToBounds = YES;
-    self.layer.cornerRadius = 50.0f;
-    self.backgroundColor = [UIColor yellowColor];
+    self.backgroundColor = [UIColor colorWithRed:1 green:1 blue:204/255.f alpha:1];
     self.layer.cornerRadius = 100;
     self.layer.maskedCorners = kCALayerMinXMinYCorner | kCALayerMaxXMinYCorner;
     
@@ -136,7 +137,6 @@
     [self addSubview:_passwordField];
     
     _closeView = [[ESKDraggingCloseView alloc] init];
-//    _closeView.delegate =
     [self addSubview:_closeView];
     
     _closeView.translatesAutoresizingMaskIntoConstraints = NO;
@@ -148,26 +148,29 @@
     CGFloat statusBarHeight = CGRectGetHeight([UIApplication sharedApplication].statusBarFrame);
     NSArray<NSLayoutConstraint *> *constraints=
     @[
-      [_closeView.topAnchor constraintEqualToAnchor:self.topAnchor constant:statusBarHeight + 10],
-      [_closeView.heightAnchor constraintEqualToConstant:30],
+      [_closeView.topAnchor constraintEqualToAnchor:self.topAnchor constant:statusBarHeight + ESKTopOffset],
+      [_closeView.heightAnchor constraintEqualToConstant:ESKCloseViewHeight],
       [_closeView.centerXAnchor constraintEqualToAnchor:self.centerXAnchor],
       [_closeView.widthAnchor constraintEqualToAnchor:self.widthAnchor],
       
       [_emailField.centerXAnchor constraintEqualToAnchor:self.centerXAnchor],
       [_emailField.bottomAnchor constraintEqualToAnchor:_nameField.topAnchor constant:-ESKBetweenOffset],
-      [_emailField.widthAnchor constraintEqualToConstant:ESKTextFiledWidth],
+      [_emailField.widthAnchor constraintEqualToConstant:ESKStandartTextFiledWidth],
+      [_emailField.heightAnchor constraintEqualToConstant:ESKStandartTextFiledHeight],
       
       [_nameField.centerXAnchor constraintEqualToAnchor:self.centerXAnchor],
       [_nameField.bottomAnchor constraintEqualToAnchor:_passwordField.topAnchor constant:-ESKBetweenOffset],
-      [_nameField.widthAnchor constraintEqualToConstant:ESKTextFiledWidth],
+      [_nameField.widthAnchor constraintEqualToConstant:ESKStandartTextFiledWidth],
+      [_nameField.heightAnchor constraintEqualToConstant:ESKStandartTextFiledHeight],
       
       [_passwordField.centerXAnchor constraintEqualToAnchor:self.centerXAnchor],
       [_passwordField.bottomAnchor constraintEqualToAnchor:self.centerYAnchor constant:-ESKBetweenOffset],
-      [_passwordField.widthAnchor constraintEqualToConstant:ESKTextFiledWidth],
+      [_passwordField.widthAnchor constraintEqualToConstant:ESKStandartTextFiledWidth],
+      [_passwordField.heightAnchor constraintEqualToConstant:ESKStandartTextFiledHeight],
       
       [_registrationButton.centerXAnchor constraintEqualToAnchor:self.centerXAnchor],
-      [_registrationButton.topAnchor constraintEqualToAnchor:_passwordField.bottomAnchor constant:50.f],
-      [_registrationButton.widthAnchor constraintEqualToConstant:ESKButtonWidth],
+      [_registrationButton.topAnchor constraintEqualToAnchor:_passwordField.bottomAnchor constant:ESKStandartButtonHeight],
+      [_registrationButton.widthAnchor constraintEqualToConstant:ESKStandartButtonWidth],
       ];
     [self addConstraints:constraints];
 }

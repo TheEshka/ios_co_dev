@@ -10,7 +10,7 @@
 #import "ESKUser.h"
 #import "ESKAuthorizationServiceProtocol.h"
 #import "ESKAuthorizationService.h"
-#import "ESKUserDefaultsHelper.h"
+#import "ESKUserDefaultsConstants.h"
 
 
 @interface ESKAuthenticationPresenter ()

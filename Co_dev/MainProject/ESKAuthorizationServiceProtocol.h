@@ -35,6 +35,8 @@
  */
 - (void)authorizationSuccessForUser:(ESKUser *)user;
 
+
+@optional
 /**
  Tells delegate that authorization was completed unsuccessfully and request return NSError
 

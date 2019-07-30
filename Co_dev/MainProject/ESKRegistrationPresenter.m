@@ -9,7 +9,7 @@
 #import "ESKRegistrationPresenter.h"
 #import "ESKAuthorizationService.h"
 #import "ESKUser.h"
-#import "ESKUserDefaultsHelper.h"
+#import "ESKUserDefaultsConstants.h"
 
 @interface ESKRegistrationPresenter ()
 

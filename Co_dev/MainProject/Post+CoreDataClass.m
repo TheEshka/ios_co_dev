@@ -1,12 +1,13 @@
 //
-//  Post.m
+//  Post+CoreDataClass.m
 //  MainProject
 //
-//  Created by Gagik on 27/07/2019.
+//  Created by Gagik on 30/07/2019.
 //  Copyright © 2019 Gagik Avetisyan. All rights reserved.
 //
+//
 
-#import "Post.h"
+#import "Post+CoreDataClass.h"
 
 @implementation Post
 

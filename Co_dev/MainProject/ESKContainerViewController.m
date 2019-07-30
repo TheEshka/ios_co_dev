@@ -78,7 +78,7 @@
       
       
 //      [self.tabBar.view.topAnchor constraintEqualToAnchor:self.collectionViewController.view.bottomAnchor],
-      [self.tabBar.view.heightAnchor constraintEqualToConstant:100.0f],
+      [self.tabBar.view.heightAnchor constraintEqualToConstant:70.0f],
       [self.tabBar.view.leadingAnchor constraintEqualToAnchor:self.view.leadingAnchor],
       [self.tabBar.view.trailingAnchor constraintEqualToAnchor:self.view.trailingAnchor],
       [self.tabBar.view.bottomAnchor constraintEqualToAnchor:self.view.bottomAnchor]

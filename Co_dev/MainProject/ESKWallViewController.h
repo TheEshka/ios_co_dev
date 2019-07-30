@@ -7,12 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ESKWallViewProtocols.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ESKWallViewController : UICollectionViewController
+@interface ESKWallViewController : UICollectionViewController<ESKWallPresenterDelegate>
 
-//@property (nonatomic, strong) id<>
+@property (nonatomic, strong) id<ESKWallViewPresenter> presenter;
 
 @end
 

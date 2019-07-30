@@ -7,6 +7,7 @@
 //
 
 #import "ESKWallPostCell.h"
+#import "ESKConstants.h"
 
 @interface ESKWallPostCell ()
 
@@ -16,6 +17,7 @@
 @property (nonatomic, strong) UILabel *createdTimeLabel;
 @property (nonatomic, strong) UILabel *descriptionLabel;
 @property (nonatomic, strong) UILabel *authorLabel;
+@property (nonatomic, strong) UIButton *responseButton;
 
 @end
 
@@ -34,7 +36,7 @@
 
 - (void)createUI
 {
-    _postImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"img"]];
+    _postImage = [[UIImageView alloc] init];
     _postImage.contentMode = UIViewContentModeScaleAspectFill;
     _postImage.clipsToBounds = YES;
     _postImage.layer.borderWidth = 3.;
@@ -62,8 +64,17 @@
     _descriptionLabel.numberOfLines = 0;
     [self addSubview:_descriptionLabel];
     
+    _responseButton = [UIButton buttonWithType:UIButtonTypeSystem];
+    [_responseButton setTitle:@"Откликнуться" forState:UIControlStateNormal];
+    _responseButton.backgroundColor = [UIColor greenColor];
+    _responseButton.layer.cornerRadius = 5;
+    _responseButton.tintColor = [UIColor whiteColor];
+    [_responseButton addTarget:self action:@selector(responseButtonAction) forControlEvents:UIControlEventTouchUpInside];
+    [self addSubview:_responseButton];
+    
     _authorLabel = [[UILabel alloc] initWithFrame:CGRectZero];
     _authorLabel.numberOfLines = 1;
+    _authorLabel.textColor = [UIColor colorWithRed:155/255.f green:161/255.f blue:171/255.f alpha:1];
     [self addSubview:_authorLabel];
     
     UIView *lineView = [[UIView alloc] initWithFrame:CGRectZero];
@@ -71,11 +82,13 @@
     [self addSubview:lineView];
     
     _postImage.translatesAutoresizingMaskIntoConstraints = NO;
+    self.translatesAutoresizingMaskIntoConstraints = NO;
     _titleLabel.translatesAutoresizingMaskIntoConstraints = NO;
     _subjectLabel.translatesAutoresizingMaskIntoConstraints = NO;
     _createdTimeLabel.translatesAutoresizingMaskIntoConstraints = NO;
     _descriptionLabel.translatesAutoresizingMaskIntoConstraints = NO;
     _authorLabel.translatesAutoresizingMaskIntoConstraints = NO;
+    _responseButton.translatesAutoresizingMaskIntoConstraints = NO;
     lineView.translatesAutoresizingMaskIntoConstraints = NO;
     NSArray<NSLayoutConstraint *> *constraints =
     @[
@@ -105,7 +118,13 @@
       [lineView.leadingAnchor constraintEqualToAnchor:_postImage.leadingAnchor],
       [lineView.trailingAnchor constraintEqualToAnchor:_titleLabel.trailingAnchor],
       
+      [_responseButton.topAnchor constraintEqualToAnchor:_authorLabel.topAnchor],
+      [_responseButton.leadingAnchor constraintEqualToAnchor:self.leadingAnchor constant:8],
+      [_responseButton.widthAnchor constraintEqualToConstant:ESKStandartButtonWidth],
+      [_responseButton.bottomAnchor constraintEqualToAnchor:_authorLabel.bottomAnchor],
+      
       [_authorLabel.topAnchor constraintEqualToAnchor:lineView.bottomAnchor constant:8],
+      [_authorLabel.heightAnchor constraintEqualToConstant:40],
       [_authorLabel.trailingAnchor constraintEqualToAnchor:_titleLabel.trailingAnchor],
       [_authorLabel.bottomAnchor constraintEqualToAnchor:self.bottomAnchor constant:-8],
       
@@ -114,14 +133,39 @@
     [NSLayoutConstraint activateConstraints:constraints];
 }
 
+- (void)prepareForReuse
+{
+    [super prepareForReuse];
+//    self.titleLabel.text = nil;
+//    self.subjectLabel.text = nil;
+//    self.createdTimeLabel.text = nil;
+//    self.descriptionLabel.text = nil;
+//    self.authorLabel.text = nil;
+//    self.postImage.image = nil;
+}
 
-- (void)setPost:(Post *)post
+- (void)responseButtonAction
+{
+    self.postImage.image = nil;
+}
+
+
+- (void)setPost:(ESKPost *)post
 {
     self.titleLabel.text = post.postTitle;
     self.subjectLabel.text = post.postSubject;
     self.createdTimeLabel.text = post.postCreatedTime;
     self.descriptionLabel.text = post.postDescription;
-    self.authorLabel.text = post.postAuthor;
+    self.authorLabel.text = post.postAuthor.name;
+    if (!post.postImageID)
+    {
+        self.postImage.image = [UIImage imageNamed:@"favicon"];
+    }
+}
+
+- (void)setImage:(UIImage *)image
+{
+    self.postImage.image = image;
 }
 
 @end

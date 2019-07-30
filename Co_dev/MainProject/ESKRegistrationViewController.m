@@ -27,7 +27,7 @@
     self = [super init];
     if (self) {
         self.modalTransitionStyle = 0;
-        self.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+        self.modalPresentationStyle = UIModalPresentationOverFullScreen;
     }
     return self;
 }

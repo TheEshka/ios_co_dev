@@ -7,44 +7,77 @@
 //
 
 #import "ESKNetworkHelper.h"
+#import "ESKNetworkConstants.h"
+#import "ESKUser.h"
+#import "ESKPost.h"
+
+
 
 @implementation ESKNetworkHelper
 
-- (NSData *)getCreatePostRequestJSONWithTitle:(NSString *)title
-                                      subject:(NSString *)subject
-                                  description:(NSString *)description
++ (NSData *)getCreatePostRequestJSONWithPost:(ESKPost *)post
 {
-    NSError *error;
     NSDictionary *request = @{
-                              @"title": title,
-                              @"subject": subject,
-                              @"description": description
+                              @"title": post.postTitle ? : @"",
+                              @"subject": post.postSubject ? : @"",
+                              @"description": post.postDescription ? : @""
                               };
-    NSData *json = [NSJSONSerialization dataWithJSONObject:request options:NSJSONWritingPrettyPrinted error:&error];
-    if (error)
-    {
-        NSLog(@"%@", error);
-    }
+    NSData *json = [NSJSONSerialization dataWithJSONObject:request options:NSJSONWritingPrettyPrinted error:nil];
     return json;
 }
 
-- (NSData *)getCreateUserRequestJSONWithName:(NSString *)name
-                                       email:(NSString *)email
-                                    password:(NSString *)password
++ (NSData *)registrationUserRequestJSONWithUser:(ESKUser *)user
 {
-    NSError *error;
     NSDictionary *request = @{
-                              @"name": name,
-                              @"email": email,
-                              @"password": password
+                              @"name": user.name ? : @"",
+                              @"email": user.email ? : @"",
+                              @"password": user.password ? : @""
                               };
-    NSData *json = [NSJSONSerialization dataWithJSONObject:request options:NSJSONWritingPrettyPrinted error:&error];
-    if (error)
-    {
-        NSLog(@"%@", error);
-    }
+    NSData *json = [NSJSONSerialization dataWithJSONObject:request options:NSJSONWritingPrettyPrinted error:nil];
     return json;
 }
+
++ (NSString *)registrationURL
+{
+    return [NSString stringWithFormat:@"%@%@", ESKServerAddress, ESKRegistrationRoute];
+}
+
++ (NSString *)autorizationURL
+{
+    return [NSString stringWithFormat:@"%@%@", ESKServerAddress, ESKAuthorizationRoute];
+}
+
++ (NSString *)getImageURLForImageID:(NSString *)imageID
+{
+    return [NSString stringWithFormat:@"%@%@/%@", ESKServerAddress, ESKImageRoute, imageID];
+}
+
++ (NSString *)createPostURL
+{
+    return [NSString stringWithFormat:@"%@%@", ESKServerAddress, ESKPostsRoute];
+}
+
++ (NSString *)getPostsURLWithOffset:(NSInteger)offset limir:(NSInteger)limit
+{
+    return [NSString stringWithFormat:@"%@%@?offset=%ld&limit=%ld", ESKServerAddress, ESKPostsRoute, offset, limit];
+}
+
++ (NSString *)setImageURLForPostID:(NSString *)postID
+{
+    return [NSString stringWithFormat:@"%@%@/%@%@", ESKServerAddress, ESKPostsRoute, postID, ESKImageRoute];
+}
+
++ (NSString *)getPostsURLForPostID:(NSString *)postID
+{
+    return [NSString stringWithFormat:@"%@%@/%@", ESKServerAddress, ESKPostsRoute, postID];
+}
+
++ (NSString *)getUserURLForUSerID:(NSString *)userID
+{
+    return [NSString stringWithFormat:@"%@%@/%@", ESKServerAddress, ESKUsersRoute, userID];
+}
+
+
 
 
 @end

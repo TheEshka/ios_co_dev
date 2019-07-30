@@ -19,7 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, weak) id<ESKCloseDraggableViewDelegate> closeDelegate;/**< Object that act as delegate of ESKCloseDraggableView*/
 
-@property (nonatomic, weak) id<ESKRegistrationViewDelegate> delegate;
+@property (nonatomic, weak) id<ESKRegistrationViewDelegate> delegate;/**< Object that act as delegate of this View*/
 
 @property (nonatomic, strong) id<ESKRegistrationViewPresenter> presenter;
 

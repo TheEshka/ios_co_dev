@@ -25,8 +25,11 @@
         _nameLabel = [[UILabel alloc] init];
         [self addSubview:_nameLabel];
         _nameLabel.translatesAutoresizingMaskIntoConstraints = NO;
+        [_nameLabel.bottomAnchor constraintEqualToAnchor:self.bottomAnchor].active = YES;
+        [_nameLabel.topAnchor constraintEqualToAnchor:self.topAnchor].active = YES;
+
         [_nameLabel.centerXAnchor constraintEqualToAnchor:self.centerXAnchor].active = YES;
-        [_nameLabel.centerYAnchor constraintEqualToAnchor:self.centerYAnchor].active = YES;
+//        [_nameLabel.centerYAnchor constraintEqualToAnchor:self.centerYAnchor].active = YES;
     }
     return self;
 }
