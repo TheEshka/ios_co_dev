@@ -8,30 +8,12 @@
 
 #import "ESKAuthenticationPresenter.h"
 #import "ESKUser.h"
-#import "ESKAuthorizationServiceProtocol.h"
-#import "ESKAuthorizationService.h"
+#import "ESKNetworkServiceProtocol.h"
+#import "ESKNetworkService.h"
 #import "ESKUserDefaultsConstants.h"
 
 
-@interface ESKAuthenticationPresenter ()
-
-//@property (nonatomic, strong) id<ESKAuthorizationServiceIntputProtocol> authenticationService;
-@property (nonatomic, strong) ESKAuthorizationService *authenticationService;
-
-@end
-
-
 @implementation ESKAuthenticationPresenter
-
-- (instancetype)init
-{
-    self = [super init];
-    if (self) {
-        _authenticationService = [ESKAuthorizationService sharedInstance];
-        _authenticationService.authorizationDelegate = self;
-    }
-    return self;
-}
 
 #pragma mark - ESKAuthenticationViewPresenter
 
@@ -44,6 +26,7 @@
     }
     [self.authenticationService authorizeWithUserParams:user];
 }
+
 
 #pragma mark - ESKAuthorizationServiceAuthorizationDelegate
 
@@ -59,12 +42,13 @@
 
 - (void)authorizationSuccessForUser:(ESKUser *)user
 {
+    [self.authenticationService setToken:user.apiToken];
+    
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    [userDefaults setObject:user.apiToken forKey:ESKtokenKey];
+    [userDefaults setObject:user.apiToken forKey:ESKTokenKey];
     [userDefaults setObject:user.email forKey:ESKEmailKey];
     [userDefaults setObject:user.password forKey:ESKPasswordKey];
     [userDefaults setObject:user.userID forKey:ESKUserIDKey];
-    [userDefaults setObject:user.name forKey:ESKNameKey];
     [self.delegate authorizationSuccess];
 }
 

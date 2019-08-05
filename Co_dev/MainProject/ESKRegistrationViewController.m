@@ -8,9 +8,10 @@
 
 #import "ESKRegistrationViewController.h"
 #import "ESKRegistrationView.h"
-#import "ESKAuthorizationService.h"
+//#import "ESKNetworkServiceProtocol.h"
 #import "ESKRegistrationPresenter.h"
 #import "ESKRegistrationProtocols.h"
+#import "ESKNetworkService.h"
 
 @interface ESKRegistrationViewController ()<ESKCloseDraggableViewDelegate, ESKRegistrationViewDelegate>
 
@@ -22,12 +23,22 @@
 
 #pragma mark - ViewController Lify Cycle
 
-- (instancetype)init
+- (instancetype)initWithRegistrateService:(ESKNetworkService *)networkService
 {
     self = [super init];
     if (self) {
         self.modalTransitionStyle = 0;
         self.modalPresentationStyle = UIModalPresentationOverFullScreen;
+        ESKRegistrationPresenter *presenter = [ESKRegistrationPresenter new];
+        ESKRegistrationView *registrationView = [[ESKRegistrationView alloc] init];
+        registrationView.delegate = self;
+        registrationView.closeDelegate = self;
+        registrationView.presenter = presenter;
+        presenter.delegate = registrationView;
+        presenter.registrationService = networkService;
+        networkService.registrationDelegate = presenter;
+        self.registrationView = registrationView;
+
     }
     return self;
 }
@@ -35,13 +46,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    ESKRegistrationPresenter *presenter = [ESKRegistrationPresenter new];
-    self.registrationView = [[ESKRegistrationView alloc] init];
-    self.registrationView.closeDelegate = self;
-    self.registrationView.delegate = self;
-    self.registrationView.presenter = presenter;
-    presenter.delegate = self.registrationView;
     self.view = self.registrationView;
 }
 
@@ -52,9 +56,6 @@
 {
     [self dismissViewControllerAnimated:YES completion:nil];
     [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
-//    [self dismissViewControllerAnimated:YES completion:^{
-//        [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
-//    }];
 }
 
 

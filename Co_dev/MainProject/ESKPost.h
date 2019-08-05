@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "ESKUser.h"
+#import "ESKImage.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -18,7 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *postSubject;
 @property (nonatomic, copy) NSString *postDescription;
 @property (nonatomic, copy) NSString *postCreatedTime;
-@property (nonatomic, copy) NSString *postImageID;
+@property (nonatomic, strong) ESKImage *postImage;
 @property (nonatomic, strong) ESKUser *postAuthor;
 @property (nonatomic, copy) NSArray<ESKUser *> *postMemebers;
 @property (nonatomic, copy) NSArray<ESKUser *> *postMemebersRequest;

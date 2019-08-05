@@ -13,27 +13,10 @@
  */
 - (void)exitButtonPressed;
 
-@end
+- (void)changeValue:(NSString *)value inRow:(NSInteger)number;
 
+- (void)userInfoChangingRequest;
 
-@protocol ESKProfileViewPresenter <NSObject>
-/**
- Check if is exist apiToken in NSUserDefaults
-
- @return YES if exist, else NO
- */
-- (BOOL)isCustomerAuthorized;
-
-/**
- Delete User info from NSUserDefaults
- */
-- (void)deleteUserData;
-
-/**
- Dowload from NSUSerDefaults general information
-
- @return Object ESKUser
- */
-- (ESKUser *)getProfileInfo;
+- (void)cancelAllChanges;
 
 @end

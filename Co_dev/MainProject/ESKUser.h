@@ -8,15 +8,23 @@
 
 #import <Foundation/Foundation.h>
 
+@class ESKImage;
+@class ESKPost;
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ESKUser : NSObject<NSSecureCoding>
+@interface ESKUser : NSObject
 
 @property (nonatomic, copy) NSString *userID;
 @property (nonatomic, copy) NSString *email;
 @property (nonatomic, copy) NSString *name;
 @property (nonatomic, copy) NSString *password;
+@property (nonatomic, copy) NSString *city;
+@property (nonatomic, copy) NSString *githubLink;
+@property (nonatomic, copy) NSString *aboutMe;
 @property (nonatomic, copy) NSString *apiToken;
+@property (nonatomic, strong) ESKImage *userImage;
+@property (nonatomic, strong) ESKPost *authorPost;
+@property (nonatomic, strong) ESKPost *memberPost;
 
 + (ESKUser *)userFromDictionary:(NSDictionary *)dictionary;
 

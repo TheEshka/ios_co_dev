@@ -25,8 +25,6 @@
 @property (nonatomic, strong) UILabel *errorLabel;
 @property (nonatomic, strong) UIActivityIndicatorView *activityView;
 
-@property (nonatomic, strong) UIButton *closeButton;
-
 @end
 
 @implementation ESKAuthenticationView
@@ -45,6 +43,8 @@
 
 - (void)loginButtonAction
 {
+    [self endEditing:YES];
+    
     ESKUser *user = [ESKUser new];
     user.email = self.emailField.text;
     user.password = self.passwordField.text;
@@ -52,8 +52,6 @@
     self.loginButton.alpha = 0;
     [self.activityView startAnimating];
     [self.presenter loginButtonPressedWithUserParams:user];
-    
-    [self endEditing:YES];
 }
 
 - (void)registrationButtonAction
@@ -61,9 +59,9 @@
     [self.delegate registrationButtonPressed];
 }
 
-- (void)closeButtonAction
+- (void)endEditingEmail
 {
-    [self.delegate close];
+    [self.passwordField becomeFirstResponder];
 }
 
 
@@ -134,11 +132,15 @@
     [self addSubview:_loginButton];
     
     _emailField = [[ESKTextField alloc] initWithFrame:CGRectZero];
+    _emailField.returnKeyType = UIReturnKeyNext;
+    [_emailField addTarget:self action:@selector(endEditingEmail) forControlEvents:UIControlEventEditingDidEndOnExit];
     _emailField.borderStyle = 3;
     _emailField.placeholder = @"Login";
     [self addSubview:_emailField];
     
     _passwordField = [[ESKTextField alloc] initWithFrame:CGRectZero];
+    _passwordField.returnKeyType = UIReturnKeyGo;
+    [_passwordField addTarget:self action:@selector(loginButtonAction) forControlEvents:UIControlEventEditingDidEndOnExit];
     _passwordField.borderStyle = 3;
     _passwordField.placeholder = @"Password";
     _passwordField.secureTextEntry = YES;
@@ -149,23 +151,14 @@
     [_registrationButton addTarget:self action:@selector(registrationButtonAction) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_registrationButton];
     
-    _closeButton = [UIButton buttonWithType:UIButtonTypeSystem];
-    _closeButton.backgroundColor = [UIColor colorWithRed:255/255.f green:64/255.f blue:64/255.f alpha:1];
-    [_closeButton setTitle:@"Back" forState:UIControlStateNormal];
-    _closeButton.layer.borderWidth = 2.f;
-    _closeButton.layer.borderColor = [UIColor darkTextColor].CGColor;
-    [_closeButton setHidden:YES];
-    [_closeButton addTarget:self action:@selector(closeButtonAction) forControlEvents:UIControlEventTouchUpInside];
-    [self addSubview:_closeButton];
-    
     _headerImage.translatesAutoresizingMaskIntoConstraints = NO;
     _emailField.translatesAutoresizingMaskIntoConstraints = NO;
     _passwordField.translatesAutoresizingMaskIntoConstraints = NO;
     _loginButton.translatesAutoresizingMaskIntoConstraints = NO;
     _registrationButton.translatesAutoresizingMaskIntoConstraints = NO;
-    _closeButton.translatesAutoresizingMaskIntoConstraints = NO;
     NSArray<NSLayoutConstraint *> *constraints=
     @[
+      [_headerImage.topAnchor constraintGreaterThanOrEqualToAnchor:self.topAnchor],
       [_headerImage.bottomAnchor constraintEqualToAnchor:_emailField.topAnchor constant:-ESKBetweenOffset],
       [_headerImage.leadingAnchor constraintEqualToAnchor:self.leadingAnchor],
       [_headerImage.trailingAnchor constraintEqualToAnchor:self.trailingAnchor],
@@ -188,12 +181,7 @@
       [_registrationButton.centerXAnchor constraintEqualToAnchor:self.centerXAnchor],
       [_registrationButton.topAnchor constraintEqualToAnchor:_loginButton.bottomAnchor constant:ESKStandartButtonOffset],
       [_registrationButton.widthAnchor constraintEqualToConstant:ESKStandartButtonWidth],
-      [_registrationButton.heightAnchor constraintEqualToConstant:ESKStandartButtonHeight],
-      
-      [_closeButton.centerXAnchor constraintEqualToAnchor:self.centerXAnchor],
-      [_closeButton.bottomAnchor constraintEqualToAnchor:self.bottomAnchor constant: -ESKBetweenOffset],
-      [_closeButton.widthAnchor constraintEqualToConstant:ESKStandartButtonWidth],
-      [_closeButton.heightAnchor constraintEqualToConstant:ESKStandartButtonHeight]
+      [_registrationButton.heightAnchor constraintEqualToConstant:ESKStandartButtonHeight]
       ];
     [self addConstraints:constraints];
 }

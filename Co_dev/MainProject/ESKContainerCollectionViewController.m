@@ -29,6 +29,9 @@ static NSString * const ESKMainReuseIdentifier = @"MainCell";
     [self.collectionView registerClass:[ESKContainerCollectionViewCell class] forCellWithReuseIdentifier:ESKMainReuseIdentifier];
 }
 
+
+#pragma mark - Outer interface
+
 - (void)addViewController:(UIViewController *)viewController
 {
     [self.viewControllersArray addObject:viewController];

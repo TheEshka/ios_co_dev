@@ -5,6 +5,7 @@
 //  Created by Gagik on 29/07/2019.
 //  Copyright © 2019 Gagik Avetisyan. All rights reserved.
 //
+
 @class ESKPost;
 @protocol ESKWallModelInput <NSObject>
 
@@ -12,7 +13,7 @@
 - (NSInteger)downloadedPostsCount;
 
 - (void)getPostsWithOffset:(NSInteger)offset limit:(NSInteger)limit;
-- (void)tokenDidRefresh:(NSString *)apiToken;
+//- (void)tokenDidRefresh:(NSString *)apiToken;
 
 - (void)getImageWithID:(NSString *)imageID;
 
@@ -21,7 +22,7 @@
 
 @protocol ESKWallModelOutput <NSObject>
 
-- (void)refreshTokenRequest;
+//- (void)refreshTokenRequest;
 
 - (void)postsDidSave;
 

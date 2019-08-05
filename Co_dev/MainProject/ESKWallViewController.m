@@ -12,6 +12,7 @@
 #import "ESKPost.h"
 #import "ESKWallPresenter.h"
 #import "ESKWallModel.h"
+#import "ESKNetworkService.h"
 
 @interface ESKWallViewController ()<UICollectionViewDelegateFlowLayout, UICollectionViewDataSource>
 
@@ -27,16 +28,19 @@
 
 static NSString * const reuseIdentifier = @"Cell";
 
-- (instancetype)init
+#pragma mark - Lify Cycle
+
+- (instancetype)initWithNetworkSerice:(ESKNetworkService *)networkService
 {
     self = [super initWithCollectionViewLayout:[UICollectionViewFlowLayout new]];
     if (self) {
         ESKWallPresenter *presenter = [ESKWallPresenter new];
         ESKWallModel *model= [ESKWallModel new];
+        model.networkService = networkService;
+        networkService.wallOutput = model;
         presenter.model = model;
         presenter.viewController = self;
-        model.changeDelegate = presenter;
-        
+        model.delegate = presenter;
         _presenter = presenter;
     }
     return self;
@@ -44,18 +48,12 @@ static NSString * const reuseIdentifier = @"Cell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.wallCollection = [[ESKWallCollectionView alloc] init];
-    self.wallCollection.frame = self.view.frame;
+    self.wallCollection = [[ESKWallCollectionView alloc] initWithFrame:self.view.frame];
     self.collectionView = self.wallCollection;
     self.wallCollection.dataSource = self;
     self.wallCollection.delegate = self;
-    [self.collectionView registerClass:[ESKWallPostCell class] forCellWithReuseIdentifier:reuseIdentifier];
+    [self.wallCollection registerClass:[ESKWallPostCell class] forCellWithReuseIdentifier:reuseIdentifier];
     [self.presenter getNextPosts];
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
 }
 
 
@@ -63,7 +61,7 @@ static NSString * const reuseIdentifier = @"Cell";
 
 - (void)triggerViewController
 {
-    [self.collectionView reloadData];
+    [self.wallCollection reloadData];
     self.nextPageIsOpening = NO;
 }
 
@@ -77,15 +75,6 @@ static NSString * const reuseIdentifier = @"Cell";
 }
 
 
-
-#pragma mark - UICollectionViewDelegate
-
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    return CGSizeMake(CGRectGetWidth(self.view.frame), 1000);
-}
-
-
 #pragma mark - UICollectionViewDataSource
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
@@ -96,9 +85,9 @@ static NSString * const reuseIdentifier = @"Cell";
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     ESKWallPostCell *cell = (ESKWallPostCell *)[collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
     ESKPost *post = [self.presenter getPostForItem:indexPath.row];
-    if (post.postImageID)
+    if (post.postImage.imageID && !post.postImage.image)
     {
-        [self.presenter getImadeWithID:post.postImageID];
+        [self.presenter getImadeWithID:post.postImage.imageID];
     }
     cell.post = post;
     return cell;
@@ -106,19 +95,6 @@ static NSString * const reuseIdentifier = @"Cell";
 
 
 #pragma mark - UICollectionViewDelegate
-
-- (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath
-{
-
-}
-- (void)collectionView:(UICollectionView *)collectionView didEndDisplayingCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath
-{
-//    ESKPost *post = [self.presenter getPostForItem:indexPath.row];
-//    if (post.postImageID)
-//    {
-//        [self.presenter getImadeWithID:post.postImageID];
-//    }
-}
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {

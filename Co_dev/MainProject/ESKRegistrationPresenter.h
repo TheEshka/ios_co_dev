@@ -8,13 +8,15 @@
 
 #import <Foundation/Foundation.h>
 #import "ESKRegistrationProtocols.h"
-#import "ESKAuthorizationServiceProtocol.h"
+#import "ESKNetworkServiceProtocol.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ESKRegistrationPresenter : NSObject<ESKRegistrationViewPresenter, ESKAuthorizationServiceRegistrationDelegate>
+@interface ESKRegistrationPresenter : NSObject<ESKRegistrationViewPresenter, ESKNetworkRegistrationDelegate>
 
 @property (nonatomic, weak) id<ESKRegistrationPresenterDelegate> delegate;
+
+@property (nonatomic, strong) id<ESKNetworkRegistrate, ESKNetworkTokenSetter> registrationService;
 
 @end
 

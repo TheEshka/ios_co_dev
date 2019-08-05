@@ -8,9 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+@class ESKNetworkService;
 NS_ASSUME_NONNULL_BEGIN
 
 @interface ESKRegistrationViewController : UIViewController
+
+- (instancetype)initWithRegistrateService:(ESKNetworkService *)networkService;
 
 @end
 

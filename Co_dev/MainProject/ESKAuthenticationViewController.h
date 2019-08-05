@@ -7,10 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ESKAuthenticationProtocols.h"
 
+@class ESKNetworkService;
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ESKAuthenticationViewController : UIViewController
+@interface ESKAuthenticationViewController : UIViewController<ESKAuthenticationViewDelegate>
+
+- (instancetype)initWithAuthenticateServie:(ESKNetworkService *)networkService;
 
 @end
 

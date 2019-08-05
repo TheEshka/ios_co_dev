@@ -7,13 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ESKProfileViewProtocols.h"
+#import "ESKProfileModelProtocol.h"
 
+@class ESKNetworkService;
 NS_ASSUME_NONNULL_BEGIN
 
 @interface ESKProfileViewController : UIViewController
 
-@property (nonatomic, strong) id<ESKProfileViewPresenter> presenter;
+@property (nonatomic, strong) id<ESKProfileModelInput> model;
+
+- (instancetype)initWithNetwotkService:(ESKNetworkService *)netwotkService;
 
 @end
 

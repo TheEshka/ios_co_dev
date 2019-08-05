@@ -13,13 +13,12 @@
 #import "ESKPost.h"
 #import "Post+CoreDataClass.h"
 
-@interface ESKWallModel ()<NetworkServiceWallOutputProtocol>
+@interface ESKWallModel ()
 
-@property (nonatomic, strong) ESKNetworkService *networkService;
 @property (nonatomic, strong) NSMutableArray<ESKPost *> *posts;
-@property (nonatomic, strong) NSMutableDictionary<NSString *, NSData *> *allPhotos;
+//@property (nonatomic, strong) NSMutableDictionary<NSString *, NSData *> *allPhotos;
 
-@property (nonatomic, copy, nullable) void (^complition)(void);
+//@property (nonatomic, copy, nullable) void (^complition)(void);
 
 @property (nonatomic, assign) BOOL isExistInternetConnection;
 
@@ -33,10 +32,9 @@
 {
     self = [super init];
     if (self) {
-        _networkService = [ESKNetworkService sharedInstance];
-        _networkService.wallOutput = self;
+//        _networkService.wallOutput = self;
         _posts = [NSMutableArray new];
-        _allPhotos = [NSMutableDictionary new];
+//        _allPhotos = [NSMutableDictionary new];
         _isExistInternetConnection = YES;
     }
     return self;
@@ -62,20 +60,8 @@
     }
 }
 
-- (void)tokenDidRefresh:(NSString *)apiTopken
-{
-    self.networkService.apiToken = apiTopken;
-    self.complition();
-}
-
 - (void)getImageWithID:(NSString *)imageID
 {
-    NSData *image = self.allPhotos[imageID];
-    if (image)
-    {
-        [self loadingPhotoIsDoneWithData:image forPhotoID:imageID];
-        return;
-    }
     [self.networkService downloadImageWithID:imageID];
 }
 
@@ -99,23 +85,16 @@
     {
         return;
     }
-    [self.changeDelegate postsDidSave];
-}
-
-- (void)getWrongTokenResponseWithCompilition:(void (^)(void))complition;
-{
-    self.complition = complition;
-    [self.changeDelegate refreshTokenRequest];
+    [self.delegate postsDidSave];
 }
 
 - (void)loadingPhotoIsDoneWithData:(NSData *)data forPhotoID:(NSString *)photoID
 {
-    self.allPhotos[photoID] = data;
     for (NSInteger i = 0; i < [self.posts count]; i++)
     {
-        if ([self.posts[i].postImageID isEqualToString:photoID])
+        if ([self.posts[i].postImage.imageID isEqualToString:photoID])
         {
-            [self.changeDelegate showDownloadedImageWithData:data forItem:i];
+            [self.delegate showDownloadedImageWithData:data forItem:i];
             return;
         }
     }

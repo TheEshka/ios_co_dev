@@ -7,29 +7,12 @@
 //
 
 #import "ESKRegistrationPresenter.h"
-#import "ESKAuthorizationService.h"
+//#import "ESKNetworkService.h"
 #import "ESKUser.h"
 #import "ESKUserDefaultsConstants.h"
 
-@interface ESKRegistrationPresenter ()
-
-//@property (nonatomic, strong) id<ESKAuthorizationServiceIntputProtocol> authenticationService;
-@property (nonatomic, strong) ESKAuthorizationService *authenticationService;
-
-@end
-
 
 @implementation ESKRegistrationPresenter
-
-- (instancetype)init
-{
-    self = [super init];
-    if (self) {
-        _authenticationService = [ESKAuthorizationService sharedInstance];
-        _authenticationService.registrationDelegate = self;
-    }
-    return self;
-}
 
 #pragma mark - RegistrationViewDelegate
 
@@ -40,9 +23,9 @@
         [self.delegate registrationUnsuccessWithMessage:@"Заполните все поля"];
         return;
     }
-    [self.authenticationService registerWithUserParams:user];
+    [self.registrationService registerWithUserParams:user];
 }
-//
+
 
 #pragma mark - AuthorizationServiceRegistrationDelegate
 
@@ -56,12 +39,13 @@
 
 - (void)registrationSuccessForUser:(ESKUser *)user
 {
+    [self.registrationService setToken:user.apiToken];
+    
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    [userDefaults setObject:user.apiToken forKey:ESKtokenKey];
+    [userDefaults setObject:user.apiToken forKey:ESKTokenKey];
     [userDefaults setObject:user.email forKey:ESKEmailKey];
     [userDefaults setObject:user.password forKey:ESKPasswordKey];
     [userDefaults setObject:user.userID forKey:ESKUserIDKey];
-    [userDefaults setObject:user.name forKey:ESKNameKey];
     [self.delegate registrationSuccess];
 }
 @end

@@ -42,6 +42,8 @@
 
 - (void)registrationButtonAction
 {
+    [self endEditing:YES];
+    
     self.registrationButton.alpha = 0;
     [self.activityView startAnimating];
     
@@ -50,8 +52,16 @@
     user.email = self.emailField.text;
     user.password = self.passwordField.text;
     [self.presenter registrationButtonPressedWithUserParams:user];
-    
-    [self endEditing:YES];
+}
+
+- (void)endEditingEmail
+{
+    [self.nameField becomeFirstResponder];
+}
+
+- (void)endEditingName
+{
+    [self.passwordField becomeFirstResponder];
 }
 
 
@@ -121,16 +131,22 @@
     [self addSubview:_registrationButton];
     
     _emailField = [[ESKTextField alloc] initWithFrame:CGRectZero];
+    _emailField.returnKeyType = UIReturnKeyNext;
+    [_emailField addTarget:self action:@selector(endEditingEmail) forControlEvents:UIControlEventEditingDidEndOnExit];
     _emailField.borderStyle = 3;
     _emailField.placeholder = @"E-mail";
     [self addSubview:_emailField];
     
     _nameField = [[ESKTextField alloc] initWithFrame:CGRectZero];
+    _nameField.returnKeyType = UIReturnKeyNext;
+    [_nameField addTarget:self action:@selector(endEditingName) forControlEvents:UIControlEventEditingDidEndOnExit];
     _nameField.borderStyle = 3;
     _nameField.placeholder = @"Nickname";
     [self addSubview:_nameField];
     
     _passwordField = [[ESKTextField alloc] initWithFrame:CGRectZero];
+    _passwordField.returnKeyType = UIReturnKeyJoin;
+    [_passwordField addTarget:self action:@selector(registrationButtonAction) forControlEvents:UIControlEventEditingDidEndOnExit];
     _passwordField.borderStyle = 3;
     _passwordField.placeholder = @"Password";
     _passwordField.secureTextEntry = YES;

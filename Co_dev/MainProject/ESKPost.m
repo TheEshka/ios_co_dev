@@ -18,9 +18,16 @@
     post.postTitle = dictionary[@"title"];
     post.postSubject = dictionary[@"subject"];
     post.postDescription = dictionary[@"description"];
-    post.postAuthor = [ESKUser userFromDictionary:dictionary[@"author"]];
     post.postCreatedTime = dictionary[@"createdAt"];
-    post.postImageID = dictionary[@"image"];
+    
+    ESKImage *image = [ESKImage new];
+    image.imageID = dictionary[@"image"];
+    post.postImage = image;
+    
+    ESKUser *author = [ESKUser new];
+    author.name = dictionary[@"author"][@"name"];
+    author.email = dictionary[@"author"][@"mail"];
+    post.postAuthor = author;
     return post;
 }
 

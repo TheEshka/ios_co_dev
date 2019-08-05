@@ -133,16 +133,6 @@
     [NSLayoutConstraint activateConstraints:constraints];
 }
 
-- (void)prepareForReuse
-{
-    [super prepareForReuse];
-//    self.titleLabel.text = nil;
-//    self.subjectLabel.text = nil;
-//    self.createdTimeLabel.text = nil;
-//    self.descriptionLabel.text = nil;
-//    self.authorLabel.text = nil;
-//    self.postImage.image = nil;
-}
 
 - (void)responseButtonAction
 {
@@ -152,20 +142,25 @@
 
 - (void)setPost:(ESKPost *)post
 {
+    _post = post;
     self.titleLabel.text = post.postTitle;
     self.subjectLabel.text = post.postSubject;
     self.createdTimeLabel.text = post.postCreatedTime;
     self.descriptionLabel.text = post.postDescription;
     self.authorLabel.text = post.postAuthor.name;
-    if (!post.postImageID)
+    if (!post.postImage.imageID)
     {
         self.postImage.image = [UIImage imageNamed:@"favicon"];
+        return;
     }
+    self.postImage.image = post.postImage.image;
 }
 
 - (void)setImage:(UIImage *)image
 {
+    self.post.postImage.image = image;
     self.postImage.image = image;
 }
+
 
 @end

@@ -7,6 +7,7 @@
 //
 
 #import "ESKUser.h"
+#import "ESKPost.h"
 
 @implementation ESKUser
 
@@ -16,30 +17,14 @@
     user.userID = dictionary[@"id"];
     user.name = dictionary[@"name"];
     user.email = dictionary[@"email"];
-    return user;
-}
-
-- (void)encodeWithCoder:(nonnull NSCoder *)aCoder {
-    [aCoder encodeObject:self.userID forKey:@"id"];
-    [aCoder encodeObject:self.userID forKey:@"name"];
-    [aCoder encodeObject:self.userID forKey:@"email"];
-}
-
-- (nullable instancetype)initWithCoder:(nonnull NSCoder *)aDecoder {
-    self = [super init];
-    
-    if (self)
+    user.city = dictionary[@"info.city"];
+    user.githubLink = dictionary[@"info.githubLink"];
+    user.aboutMe = dictionary[@"info.aboutMe"];
+    if (dictionary[@"info.authorPosts"])
     {
-        [aDecoder encodeObject:self.userID forKey:@"id"];
-        [aDecoder encodeObject:self.userID forKey:@"name"];
-        [aDecoder encodeObject:self.userID forKey:@"email"];
+        user.authorPost = [ESKPost postFromDictionary:dictionary[@"info.authorPosts"]];
     }
-    return self;
-}
-
-+ (BOOL)supportsSecureCoding
-{
-    return YES;
+    return user;
 }
 
 @end

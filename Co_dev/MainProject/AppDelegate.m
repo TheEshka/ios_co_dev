@@ -14,6 +14,8 @@
 #import "ESKWallViewController.h"
 #import "ESKMyTeamController.h"
 
+#import "ESKNetworkService.h"
+
 @interface AppDelegate ()
 
 @end
@@ -27,14 +29,18 @@
     self.window = [UIWindow new];
     [self.window makeKeyAndVisible];
     
+    ESKNetworkService *networkService = [[ESKNetworkService alloc] init];
+    
+    
     ESKContainerViewController *container = [ESKContainerViewController new];
-    ESKProfileViewController *profileController = [[ESKProfileViewController alloc] init];
-    ESKWallViewController *wallController = [[ESKWallViewController alloc] init];
+    ESKProfileViewController *profileController = [[ESKProfileViewController alloc] initWithNetwotkService:networkService];
+    ESKWallViewController *wallController = [[ESKWallViewController alloc] initWithNetworkSerice:networkService];
     ESKMyTeamController *teamController = [[ESKMyTeamController alloc] init];
 
     [container addContentViewController:profileController forTitle:@"Profile"];
     [container addContentViewController:wallController forTitle:@"Wall"];
     [container addContentViewController:teamController forTitle:@"My Team"];
+    [container setStartViewController:0];
 
     self.window.rootViewController = container;
     return YES;

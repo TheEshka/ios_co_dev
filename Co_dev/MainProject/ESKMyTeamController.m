@@ -14,7 +14,7 @@
 #import "ESKNetworkServiceProtocol.h"
 #import "ESKNetworkService.h"
 
-@interface ESKMyTeamController ()<ESKTeamViewDelegat, NetworkServiceTeamOutputProtocol>
+@interface ESKMyTeamController ()<ESKTeamViewDelegat, ESKNetworkServiceTeamOutputProtocol>
 
 @property (nonatomic, strong) NSArray<ESKUser *> *membersArray;
 @property (nonatomic, strong) NSArray<ESKUser *> *membersRequestArray;
@@ -29,9 +29,9 @@ static NSString * const memberCell = @"MemberCell";
 static NSString * const requestCell = @"RequestCell";
 
 
-- (instancetype)init
+- (instancetype)initWithNetworkService:(ESKNetworkService *)networkService
 {
-    self = [super initWithStyle:UITableViewStylePlain];
+    self = [super initWithStyle:UITableViewStyleGrouped];
     if (self) {
         
     }
@@ -49,8 +49,6 @@ static NSString * const requestCell = @"RequestCell";
     
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     [self.tableView setEstimatedRowHeight: 60.f];
-    self.networkService = [ESKNetworkService sharedInstance];
-    self.networkService.teamOutpur = self;
     [self.networkService getTeam];
 }
 
@@ -110,6 +108,11 @@ static NSString * const requestCell = @"RequestCell";
     self.membersRequestArray = [self parseUserArray:requestArray];
     [self.tableView reloadData];
 }
+
+- (void)downloadFromCoreData {
+    
+}
+
 
 
 - (NSArray<ESKUser *> *)parseUserArray:(NSArray *)array

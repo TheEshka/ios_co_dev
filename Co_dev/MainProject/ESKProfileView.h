@@ -11,15 +11,19 @@
 
 @class ESKUser;
 
-
 NS_ASSUME_NONNULL_BEGIN
 
+static NSString * const userInfoCell = @"userInfoCell";
 
-@interface ESKProfileView : UIView
+@interface ESKProfileView : UIView<UITextViewDelegate>
 
 @property (nonatomic, strong) id<ESKProfileViewDelegate> delegate;
 
-- (void)setUser:(ESKUser *)user;
+- (void)rebuildProfileInformation;
+
+- (void)setTableViewDataSource:(id<UITableViewDataSource>)controller;
+
+- (void)setTableViewDelegate:(id<UITableViewDelegate>)controller;
 
 @end
 

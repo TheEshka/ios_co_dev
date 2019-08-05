@@ -9,9 +9,9 @@
 #import "ESKWallPresenter.h"
 #import "ESKUserDefaultsConstants.h"
 #import "ESKUser.h"
-#import "ESKAuthorizationService.h"
+#import "ESKNetworkServiceProtocol.h"
 
-@interface ESKWallPresenter ()<ESKAuthorizationServiceAuthethicationDelegate>
+@interface ESKWallPresenter ()
 
 @property (nonatomic, assign) NSInteger postEveryQuery;
 
@@ -55,17 +55,13 @@
 
 #pragma mark - ESKWallModelOutput
 
-- (void)refreshTokenRequest
-{
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    ESKUser *user = [ESKUser new];
-    user.email = [userDefaults objectForKey:ESKEmailKey];
-    user.password = [userDefaults objectForKey:ESKPasswordKey];
-    
-    ESKAuthorizationService *authService = [ESKAuthorizationService sharedInstance];
-    authService.authorizationDelegate = self;
-    [authService authorizeWithUserParams:user];
-}
+//- (void)refreshTokenRequest
+//{
+//    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+//    ESKUser *user = [ESKUser new];
+//    user.email = [userDefaults objectForKey:ESKEmailKey];
+//    user.password = [userDefaults objectForKey:ESKPasswordKey];
+//}
 
 
 - (void)postsDidSave
@@ -79,16 +75,25 @@
 }
 
 
-#pragma mark - ESKAuthorizationServiceAuthethicationDelegate
-- (void)authorizationSuccessForUser:(ESKUser *)user
-{
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    [userDefaults setObject:user.apiToken forKey:ESKtokenKey];
-    [userDefaults setObject:user.email forKey:ESKEmailKey];
-    [userDefaults setObject:user.password forKey:ESKPasswordKey];
-    [userDefaults setObject:user.userID forKey:ESKUserIDKey];
-    [userDefaults setObject:user.name forKey:ESKNameKey];
-    [self.model tokenDidRefresh:user.apiToken];
-}
+//#pragma mark - ESKAuthorizationServiceAuthethicationDelegate
+//- (void)authorizationSuccessForUser:(ESKUser *)user
+//{
+//    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+//    [userDefaults setObject:user.apiToken forKey:ESKTokenKey];
+//    [userDefaults setObject:user.email forKey:ESKEmailKey];
+//    [userDefaults setObject:user.password forKey:ESKPasswordKey];
+//    [userDefaults setObject:user.userID forKey:ESKUserIDKey];
+//    [self.model tokenDidRefresh:user.apiToken];
+//}
+//
+//- (void)authorizationUnsuccessWithError:(NSError *)error {
+//    
+//}
+//
+//
+//- (void)authorizationUnsuccessWithResponse:(NSDictionary *)errorMessage {
+//    
+//}
+
 
 @end

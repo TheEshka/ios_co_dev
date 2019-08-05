@@ -7,34 +7,41 @@
 //
 
 #import "ESKNetworkService.h"
-#import "ESKNetworkHelper.h"
+#import "ESKUser.h"
+#import "ESKTokenManager.h"
+#import "ESKRequestCreator.h"
 
 @interface ESKNetworkService ()
 
 @property (nonatomic, strong) NSURLSession *urlSession;/**< Описание свойства */
 
+@property (nonatomic, strong) ESKTokenManager *tokenManager;
+@property (nonatomic, strong) ESKRequestCreator *requestCreator;
+
 @end
 
 @implementation ESKNetworkService
 
-+ (ESKNetworkService *)sharedInstance {
-    static ESKNetworkService *sharedInstance = nil;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        sharedInstance = [[self alloc] init];
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        self.tokenManager = [ESKTokenManager new];
+        self.tokenManager.authenticateService = self;
+        
+        self.requestCreator = [ESKRequestCreator new];
+        self.requestCreator.stantartTimeout = 15;
+        
         NSURLSessionConfiguration *sessionConfiguration = [NSURLSessionConfiguration defaultSessionConfiguration];
         [sessionConfiguration setAllowsCellularAccess:YES];
-        sharedInstance.urlSession = [NSURLSession sessionWithConfiguration:sessionConfiguration delegate:nil delegateQueue:nil];
-    });
-    return sharedInstance;
+        self.urlSession = [NSURLSession sessionWithConfiguration:sessionConfiguration delegate:nil delegateQueue:nil];
+    }
+    return self;
 }
 
 - (void)downloadPostsWithOffset:(NSInteger)offset limit:(NSInteger)limit
 {
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-    [request setURL:[NSURL URLWithString:[ESKNetworkHelper getPostsURLWithOffset:offset limir:limit]]];
-    [request setTimeoutInterval:40];
-    [request setValue:self.apiToken forHTTPHeaderField:@"Authorization"];
+    NSURLRequest *request = [self.requestCreator downloadPostsRequestOffset:offset limit:limit];
     
     NSURLSessionDataTask *registrationTask = [self.urlSession dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         if (error)
@@ -49,9 +56,10 @@
         if ( ((NSHTTPURLResponse *)response).statusCode != 200 )
         {
             dispatch_async(dispatch_get_main_queue(), ^{
-                if (((NSHTTPURLResponse *)response).statusCode != 401)
+                if (((NSHTTPURLResponse *)response).statusCode == 401)
                 {
-                    [self.wallOutput getWrongTokenResponseWithCompilition:^{
+                    self.authorizationDelegate = self.tokenManager;
+                    [self.tokenManager refreshTokenWithComplition:^{
                         [self downloadPostsWithOffset:offset limit:limit];
                     }];
                     return;
@@ -71,7 +79,7 @@
 
 - (void)downloadImageWithID:(NSString *)imageID
 {
-    NSURL *url = [NSURL URLWithString:[ESKNetworkHelper getImageURLForImageID:imageID]];
+    NSURL *url = [self.requestCreator downloadImageURLForID:imageID];
     NSURLSessionDownloadTask *sessionDownloadTask = [self.urlSession downloadTaskWithURL:url completionHandler:^(NSURL * _Nullable location, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         NSData *data = [NSData dataWithContentsOfURL:location];
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -83,10 +91,7 @@
 
 - (void)getTeam
 {
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-    [request setURL:[NSURL URLWithString:[ESKNetworkHelper getPostsURLForPostID:@"5d4060066b2ab193b1ec4455"]]];
-    [request setTimeoutInterval:40];
-    [request setValue:self.apiToken forHTTPHeaderField:@"Authorization"];
+    NSURLRequest *request = [self.requestCreator downloadPostRequestForID:@"5d4060066b2ab193b1ec4455"];
     
     NSURLSessionDataTask *registrationTask = [self.urlSession dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         if (error)
@@ -101,9 +106,10 @@
         if ( ((NSHTTPURLResponse *)response).statusCode != 200 )
         {
             dispatch_async(dispatch_get_main_queue(), ^{
-                if (((NSHTTPURLResponse *)response).statusCode != 401)
+                if (((NSHTTPURLResponse *)response).statusCode == 401)
                 {
-                    [self.wallOutput getWrongTokenResponseWithCompilition:^{
+                    self.authorizationDelegate = self.tokenManager;
+                    [self.tokenManager refreshTokenWithComplition:^{
                         [self getTeam];
                     }];
                     return;
@@ -118,6 +124,162 @@
         });
     }];
     [registrationTask resume];
+}
+
+- (void)downloadInfoOfUser:(NSString *)userID
+{
+    NSURLRequest *request =
+    [self.requestCreator downloadUserInfoRequestForID:userID];
+    
+    NSURLSessionDataTask *registrationTask = [self.urlSession dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        if (error)
+        {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.profileOutpur downloadFromCoreData];
+            });
+            return;
+        }
+        
+        NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
+        if ( ((NSHTTPURLResponse *)response).statusCode != 200 )
+        {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (((NSHTTPURLResponse *)response).statusCode == 401)
+                {
+                    self.authorizationDelegate = self.tokenManager;
+                    [self.tokenManager refreshTokenWithComplition:^{
+                        [self downloadInfoOfUser:userID];
+                    }];
+                    return;
+                }
+                [self.profileOutpur downloadFromCoreData];
+            });
+            return;
+        }
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.profileOutpur profileDidDownload:responseDictionary];
+        });
+        
+    }];
+    [registrationTask resume];
+}
+
+
+- (void)changeProfileInfoWithParams:(ESKUser *)user
+{
+    NSURLRequest *request = [self.requestCreator changeProfileInfoRequest:user];
+    
+    NSURLSessionDataTask *authTask = [self.urlSession dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        if (error)
+        {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.profileOutpur downloadFromCoreData];
+            });
+            return;
+        }
+        
+        NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
+        if ( ((NSHTTPURLResponse *)response).statusCode != 200 )
+        {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (((NSHTTPURLResponse *)response).statusCode == 401)
+                {
+                    self.authorizationDelegate = self.tokenManager;
+                    [self.tokenManager refreshTokenWithComplition:^{
+                        [self changeProfileInfoWithParams:user];
+                    }];
+                    return;
+                }
+                [self.profileOutpur downloadFromCoreData];
+            });
+            return;
+        }
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.profileOutpur profileDidDownload:responseDictionary];
+        });
+        
+    }];
+    
+    [authTask resume];
+}
+
+
+#pragma mark ESKNetworkAuthenticationInput
+
+- (void)authorizeWithUserParams:(ESKUser *)user
+{
+    NSURLRequest *request = [self.requestCreator authorizeRequestUserParams:user];
+    
+    NSURLSessionDataTask *authTask = [self.urlSession dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        if (error)
+        {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.authorizationDelegate authorizationUnsuccessWithError: error];
+            });
+            return;
+        }
+        
+        NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
+        if ( ((NSHTTPURLResponse *)response).statusCode != 200 )
+        {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.authorizationDelegate authorizationUnsuccessWithResponse:responseDictionary];
+            });
+            return;
+        }
+        
+        user.apiToken = ((NSHTTPURLResponse *)response).allHeaderFields[@"Authorization"];
+        user.email = responseDictionary[@"email"];
+        user.name = responseDictionary[@"name"];
+        user.userID = responseDictionary[@"id"];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.authorizationDelegate authorizationSuccessForUser:user];
+        });
+        
+    }];
+    
+    [authTask resume];
+}
+
+
+#pragma mark ESKNetworkRegistrationInput
+
+- (void)registerWithUserParams:(ESKUser *)user
+{
+    NSURLRequest *request = [self.requestCreator registrateRequestUserParams:user];
+    
+    NSURLSessionDataTask *registrationTask = [self.urlSession dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        if (error)
+        {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.registrationDelegate registrationUnsuccessWithError:error];
+            });
+            return;
+        }
+        
+        NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
+        if ( ((NSHTTPURLResponse *)response).statusCode != 201)
+        {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.registrationDelegate registrationUnsuccessWithResponse:responseDictionary];
+            });
+            return;
+        }
+        
+        user.email = responseDictionary[@"email"];
+        user.userID = responseDictionary[@"id"];
+        user.apiToken = ((NSHTTPURLResponse *)response).allHeaderFields[@"Authorization"];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.registrationDelegate registrationSuccessForUser:user];
+        });
+    }];
+    [registrationTask resume];
+}
+
+- (void)setToken:(NSString *)apiToken {
+    self.requestCreator.apiToken = apiToken;
 }
 
 @end

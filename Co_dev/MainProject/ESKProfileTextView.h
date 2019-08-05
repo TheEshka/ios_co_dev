@@ -1,17 +1,18 @@
 //
-//  Presenter.h
+//  ESKProfileTextView.h
 //  MainProject
 //
-//  Created by Gagik on 28/07/2019.
+//  Created by Gagik on 02/08/2019.
 //  Copyright © 2019 Gagik Avetisyan. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
-#import "ESKProfileViewProtocols.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ESKProfilePresenter : NSObject<ESKProfileViewPresenter>
+@interface ESKProfileTextView : UITextView
+
+@property (nonatomic, strong) NSIndexPath *indexPath;
 
 @end
 

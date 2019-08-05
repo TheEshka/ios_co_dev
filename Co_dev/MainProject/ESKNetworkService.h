@@ -9,22 +9,26 @@
 #import <Foundation/Foundation.h>
 #import "ESKNetworkServiceProtocol.h"
 
+
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ESKNetworkService : NSObject<NetworkServiceIntputProtocol>
+@interface ESKNetworkService : NSObject<ESKNetworkServiceIntputProtocol, ESKNetworkRegistrate, ESKNetworkAuthenticate, ESKNetworkTokenSetter>
 
-@property (nonatomic, strong) NSString *apiToken;
+@property (nonatomic, weak) id<ESKNetworkServiceWallOutputProtocol> wallOutput; /**<  */
 
-@property (nonatomic, weak) id<NetworkServiceWallOutputProtocol> wallOutput; /**<  */
+@property (nonatomic, weak) id<ESKNetworkServiceTeamOutputProtocol> teamOutpur;
 
-@property (nonatomic, weak) id<NetworkServiceTeamOutputProtocol> teamOutpur;
+@property (nonatomic, weak) id<ESKNetworkServiceProfileOutputProtocol> profileOutpur;
 
 /**
- Singleton of ESKNetworkService
-
- @return instance of ESKNetworkService
+ Delegate implement methods from authorization service for registration requests
  */
-+ (ESKNetworkService *)sharedInstance;
+@property (nonatomic, nullable, weak) id<ESKNetworkAuthenticateDelegate> authorizationDelegate;
+
+/**
+ Delegate implement methods from authorization service for authorization requests
+ */
+@property (nonatomic, nullable, weak) id<ESKNetworkRegistrationDelegate> registrationDelegate;
 
 @end
 

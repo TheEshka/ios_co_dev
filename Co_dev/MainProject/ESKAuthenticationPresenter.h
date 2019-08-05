@@ -8,13 +8,15 @@
 
 #import <Foundation/Foundation.h>
 #import "ESKAuthenticationProtocols.h"
-#import "ESKAuthorizationServiceProtocol.h"
+#import "ESKNetworkServiceProtocol.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ESKAuthenticationPresenter : NSObject<ESKAuthenticationViewPresenter, ESKAuthorizationServiceAuthethicationDelegate>
+@interface ESKAuthenticationPresenter : NSObject<ESKAuthenticationViewPresenter, ESKNetworkAuthenticateDelegate>
 
 @property (nonatomic, weak) id<ESKAuthenticationPresenterDelegate> delegate;
+@property (nonatomic, strong) id<ESKNetworkAuthenticate, ESKNetworkTokenSetter> authenticationService;
+
 
 @end
 

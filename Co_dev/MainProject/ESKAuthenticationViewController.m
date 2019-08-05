@@ -8,12 +8,12 @@
 
 #import "ESKAuthenticationViewController.h"
 #import "ESKAuthenticationView.h"
-//#import "ESKAuthenticationProtocols.h"
+#import "ESKNetworkService.h"
 #import "ESKRegistrationViewController.h"
 #import "ESKAuthenticationPresenter.h"
 
 
-@interface ESKAuthenticationViewController ()<ESKAuthenticationViewDelegate>
+@interface ESKAuthenticationViewController ()
 
 @property (nonatomic, strong) ESKAuthenticationView *authenticationView;
 
@@ -23,26 +23,29 @@
 
 #pragma mark - ViewController Lify Cycle
 
-- (instancetype)init
+- (instancetype)initWithAuthenticateServie:(ESKNetworkService *)networkService
 {
     self = [super init];
     if (self) {
         self.modalTransitionStyle = 0;
         self.modalPresentationStyle = UIModalPresentationOverCurrentContext;
         self.definesPresentationContext = YES;
+        
+        ESKAuthenticationPresenter *presenter = [ESKAuthenticationPresenter new];
+        ESKAuthenticationView *authenticationView = [[ESKAuthenticationView alloc] init];
+        presenter.authenticationService = networkService;
+        presenter.delegate = authenticationView;
+        authenticationView.delegate = self;
+        authenticationView.presenter = presenter;
+        networkService.authorizationDelegate = presenter;
+        self.authenticationView = authenticationView;
     }
     return self;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    ESKAuthenticationPresenter *presenter = [ESKAuthenticationPresenter new];
-    self.authenticationView = [[ESKAuthenticationView alloc] init];
-    self.authenticationView.delegate = self;
-    self.authenticationView.presenter = presenter;
-    presenter.delegate = self.authenticationView;
-    
+
     self.view = self.authenticationView;
 }
 
@@ -51,8 +54,8 @@
 
 - (void)registrationButtonPressed
 {
-    ESKRegistrationViewController *registrationViewController = [[ESKRegistrationViewController alloc] init];
-//    self.authorizationService.registrationDelegate = registrationViewController;
+    ESKNetworkService *registrationService = (ESKNetworkService *)((ESKAuthenticationPresenter *)self.authenticationView.presenter).authenticationService;
+    ESKRegistrationViewController *registrationViewController = [[ESKRegistrationViewController alloc] initWithRegistrateService:registrationService];
     [self presentViewController:registrationViewController animated:YES completion:nil];
 }
 

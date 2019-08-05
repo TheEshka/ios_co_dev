@@ -9,11 +9,14 @@
 #import <UIKit/UIKit.h>
 #import "ESKWallViewProtocols.h"
 
+@class ESKNetworkService;
 NS_ASSUME_NONNULL_BEGIN
 
 @interface ESKWallViewController : UICollectionViewController<ESKWallPresenterDelegate>
 
 @property (nonatomic, strong) id<ESKWallViewPresenter> presenter;
+
+- (instancetype)initWithNetworkSerice:(ESKNetworkService *)networkService;
 
 @end
 

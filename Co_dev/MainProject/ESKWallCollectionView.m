@@ -14,9 +14,10 @@
 
 #pragma mark - Life Cycle
 
-- (instancetype)init
+- (instancetype)initWithFrame:(CGRect)frame
 {
-    self = [super initWithFrame:CGRectZero collectionViewLayout:[self setupLayout]];
+    UICollectionViewLayout *layout = [self setupLayoutWithConstWidth:CGRectGetWidth(frame)];
+    self = [super initWithFrame:frame collectionViewLayout:layout];
     if (self) {
         self.backgroundColor = [UIColor esk_BackgroundColor];
         self.contentInset = UIEdgeInsetsMake(15, 0, 0, 0);
@@ -30,11 +31,12 @@
 
 #pragma mark - Helper setup methods
 
-- (UICollectionViewLayout *)setupLayout
+- (UICollectionViewLayout *)setupLayoutWithConstWidth:(CGFloat)width
 {
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
     layout.estimatedItemSize = UICollectionViewFlowLayoutAutomaticSize;
     layout.minimumLineSpacing = 20;
+    layout.estimatedItemSize = CGSizeMake(width, 500);
     layout.sectionInset = UIEdgeInsetsMake(0, 0, 30, 0);
     return layout;
 }

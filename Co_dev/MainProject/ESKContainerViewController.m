@@ -29,6 +29,7 @@
         [self setupContainerCollectionView];
         [self setupTapBar];
         self.definesPresentationContext = YES;
+        self.viewControllerNumber = 0;
     }
     return self;
 }
@@ -39,7 +40,6 @@
 
 - (void)viewDidAppear:(BOOL)animated
 {
-    self.viewControllerNumber = 0;
     [self.tabBar selectItemNumber:self.viewControllerNumber];
     [super viewDidAppear:YES];
 }
@@ -73,12 +73,10 @@
       [self.collectionViewController.view.topAnchor constraintEqualToAnchor:self.view.topAnchor constant:barHeight],
       [self.collectionViewController.view.leadingAnchor constraintEqualToAnchor:self.view.leadingAnchor],
       [self.collectionViewController.view.trailingAnchor constraintEqualToAnchor:self.view.trailingAnchor],
-      [self.collectionViewController.view.bottomAnchor constraintEqualToAnchor:self.tabBar.view.topAnchor],
-//      [self.collectionViewController.view.heightAnchor constraintEqualToAnchor:self.view.heightAnchor multiplier:0.85],
+      [self.collectionViewController.view.heightAnchor constraintEqualToAnchor:self.view.heightAnchor multiplier:0.88],
       
       
-//      [self.tabBar.view.topAnchor constraintEqualToAnchor:self.collectionViewController.view.bottomAnchor],
-      [self.tabBar.view.heightAnchor constraintEqualToConstant:70.0f],
+      [self.tabBar.view.topAnchor constraintEqualToAnchor:self.collectionViewController.view.bottomAnchor],
       [self.tabBar.view.leadingAnchor constraintEqualToAnchor:self.view.leadingAnchor],
       [self.tabBar.view.trailingAnchor constraintEqualToAnchor:self.view.trailingAnchor],
       [self.tabBar.view.bottomAnchor constraintEqualToAnchor:self.view.bottomAnchor]
